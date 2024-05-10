@@ -7,7 +7,7 @@
 #root {
   height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: left;
   justify-content: center;
   flex-direction: column;
   gap: 1em;
@@ -19,7 +19,7 @@
 /* height of the container */
 .leaflet-container {
   height: 90vh;
-  width: 90%;
+  width: 50%;
   border-radius: 2rem;
 }
 
