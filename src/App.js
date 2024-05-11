@@ -4,6 +4,7 @@ import Base from './base'
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Iii from './iii'
+import Demo from './demo'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route path="/" element={<Base />} />
         <Route path="/home" element={<Home />} />
         <Route path="/index" element={<Iii />} />
+        <Route path="/demo" element={<Demo />} />
         
       </Routes>
     </BrowserRouter>

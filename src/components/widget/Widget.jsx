@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Chart } from 'react-google-charts';
-
-import CommitCalendar from './components/github';
 import { fetchAllData } from '../../utils/widgetAPI';
 
-
-function Widget({ selectedOption, width, height }) {
+export default function Widget({ selectedOption, width, height }) {
     const [data, setData] = useState(null);
 
     useEffect(() => {
@@ -16,7 +13,6 @@ function Widget({ selectedOption, width, height }) {
         }
 
     }, [selectedOption]);
-
 
     if (!data) {
         return <div>Loading...</div>;
@@ -56,12 +52,9 @@ function Widget({ selectedOption, width, height }) {
                 <RainfallChartMap Data={data.rainfall} />
             </div>
             <div className='flex align-bottom justify-center h-max'>
-            <HumidityChartMap Data={data.humidity} />
-
+                <HumidityChartMap Data={data.humidity} />
             </div>
-            <div>
-                <CommitCalendar dataAr={dataAr}/>
-            </div>
+            
             {/* <div>
                 <span>Min: 18 Max: 36</span>
                 <span>Latest updated: 21min ago</span>
@@ -69,41 +62,6 @@ function Widget({ selectedOption, width, height }) {
         </div>  
     );
 }
-
-export default Widget;
-
-const dataAr = [
-    { date: '2024-03-01', count: 5 },
-    { date: '2024-03-02', count: 2 },
-    { date: '2024-03-03', count: 8 },
-    { date: '2024-03-04', count: 0 },
-    { date: '2024-03-05', count: 1 },
-    { date: '2024-03-06', count: 4 },
-    { date: '2024-03-07', count: 6 },
-    { date: '2024-03-08', count: 3 },
-    { date: '2024-03-09', count: 7 },
-    { date: '2024-03-10', count: 2 },
-    { date: '2024-03-11', count: 5 },
-    { date: '2024-03-12', count: 1 },
-    { date: '2024-03-13', count: 0 },
-    { date: '2024-03-14', count: 3 },
-    { date: '2024-03-15', count: 9 },
-    { date: '2024-03-16', count: 2 },
-    { date: '2024-03-17', count: 4 },
-    { date: '2024-03-18', count: 6 },
-    { date: '2024-03-19', count: 0 },
-    { date: '2024-03-20', count: 1 },
-    { date: '2024-03-21', count: 3 },
-    { date: '2024-03-22', count: 5 },
-    { date: '2024-03-23', count: 7 },
-    { date: '2024-03-24', count: 2 },
-    { date: '2024-03-25', count: 4 },
-    { date: '2024-03-26', count: 8 },
-    { date: '2024-03-27', count: 0 },
-    { date: '2024-03-28', count: 3 },
-    { date: '2024-03-29', count: 6 },
-    { date: '2024-03-30', count: 1 },
-];
 
 export const options = {
   title: "Rainfall Over Time",
@@ -133,7 +91,6 @@ export const tempratureoptions = {
     chartArea: { width: "80%", height: "100%"   },
 };
 
-
 export function HumidityChartMap({ Data}) {
     if (!Data) {
         return <div>No humidity data available</div>;
@@ -154,7 +111,6 @@ export function HumidityChartMap({ Data}) {
     );
 }
 
-
 export function TempratureChartMap({ Data}) {
 
     if (!Data) {
@@ -169,8 +125,8 @@ export function TempratureChartMap({ Data}) {
     return (
         <Chart
         chartType="AreaChart"
-        width="100%"
-        height="200px"
+        width="50%"
+        height="100px"
         data={chartData}
         options={tempratureoptions}
         />
@@ -191,7 +147,7 @@ export function RainfallChartMap({ Data}) {
         <Chart
         chartType="AreaChart"
         width="100%"
-        height="300px"
+        height="100px"
         data={chartData}
         options={rainfalloptions}
         />

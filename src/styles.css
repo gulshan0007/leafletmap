@@ -14,13 +14,15 @@
   font-family: sans-serif;
   color: #333;
   background-color: #f3e4d7;
+  margin-left: 5pxs;
 }
 
 /* height of the container */
 .leaflet-container {
   height: 90vh;
-  width: 50%;
+  width: 60%;
   border-radius: 2rem;
+  margin-left: 20px;
 }
 
 .cluster-icon {
