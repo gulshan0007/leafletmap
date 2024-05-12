@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -17,7 +21,12 @@
   margin-left: 5pxs;
 }
 
-/* height of the container */
+.flex-col{
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
 .leaflet-container {
   height: 90vh;
   width: 60%;

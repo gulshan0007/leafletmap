@@ -265,7 +265,7 @@ export default function Base() {
         ))}
       </MarkerClusterGroup>
 
-      <Widget selectedOption={selectedOption} width="100%" height="100%" />
+      {/* <Widget selectedOption={selectedOption} width="100%" height="100%" /> */}
     </MapContainer>
   );
 }

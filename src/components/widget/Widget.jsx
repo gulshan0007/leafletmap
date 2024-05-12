@@ -19,7 +19,7 @@ export default function Widget({ selectedOption, width, height }) {
     }
 
     return (
-        <div className='relative text-xl bg-white w-[120%] h-min text-slate-800 mx-auto rounded-3xl flex flex-col p-10 shadow-lg z-10 ' style={{ width, height }}>
+        <div className='relative text-xl bg-white h-min text-slate-800 mx-auto rounded-3xl flex flex-col p-10 shadow-lg z-10 ' style={{ width, height }}>
             <div className='relative flex justify-evenly'> 
                 <div className='w-1/3 flex justify-evenly'>
                     <div className='flex flex-col text-center'>
