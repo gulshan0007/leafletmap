@@ -5,33 +5,24 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
+  padding: 0; 
 }
 
 #root {
   height: 100vh;
-  display: flex;
-  align-items: left;
-  justify-content: center;
-  flex-direction: column;
-  gap: 1em;
   font-family: sans-serif;
   color: #333;
   background-color: #f3e4d7;
-  margin-left: 5pxs;
 }
 
 .flex-col{
   display: flex;
   flex-direction: column;
-  gap: 1em;
 }
 
 .leaflet-container {
-  height: 90vh;
+  height: 100%;
   width: 100%;
-  border-radius: 2rem;
-  margin-left: 20px;
 }
 
 .cluster-icon {
