@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Base from './base'; // Assuming Base contains the map component
 import Iii from './iii'; // Assuming Iii contains the widget component
+import Iii2 from './Iil2';
 
 function Demo() {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -12,9 +13,11 @@ function Demo() {
       <div style={{ width: '100%', height: '87%', overflow: 'hidden' }}>
         <Base setSelectedOption = {setSelectedOption} />
       </div>
-      <div style={{  height: '80%'}}>
+      <div style={{  width: '40%',height: '50%'}}>
         <Iii selectedOption={selectedOption}/>
+        <Iii2 selectedOption={selectedOption}/>
       </div>
+      
     </div>
     </>
   );
