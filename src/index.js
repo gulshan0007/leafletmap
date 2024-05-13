@@ -12,7 +12,7 @@ root.render(
   <StrictMode>
     <br></br>
     <br></br>
-    <h1 style={{ marginTop: '10px', textAlign: 'center' }}>Mumbai Flood Warning System</h1>
+    
     <App />
   </StrictMode>
 );

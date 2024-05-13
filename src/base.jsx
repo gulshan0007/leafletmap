@@ -42,7 +42,7 @@ export default function Base(props) {
 }, []);
 
   if (!stations) {
-    return <div>Loading...</div>;
+    return <div>.</div>;
   }
 
   else {  
