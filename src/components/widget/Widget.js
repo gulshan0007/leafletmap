@@ -19,7 +19,11 @@ export default function Widget({ selectedOption, width, height }) {
     }
 
     return (
-        <div className='relative text-xl bg-white h-min text-slate-800 mx-auto rounded-3xl flex flex-col p-10 shadow-lg z-10 ' style={{ width, height }}>
+        <>
+        <hr/>
+        <div className='relative text-xl bg-white h-max text-slate-800 mx-auto flex flex-col p-10 shadow-lg z-10 ' style={{ width, height }}>
+        <h3 className='text-center'>MRDM STATION</h3>
+        <hr className='mb-6'/>
             <div className='relative flex justify-evenly'> 
                 <div className='w-1/3 flex justify-evenly'>
                     <div className='flex flex-col text-center'>
@@ -60,6 +64,7 @@ export default function Widget({ selectedOption, width, height }) {
                 <span>Latest updated: 21min ago</span>
             </div> */}
         </div>  
+        </>
     );
 }
 

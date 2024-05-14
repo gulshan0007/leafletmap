@@ -1,32 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { Chart } from 'react-google-charts';
-import { fetchAllData } from '../../utils/widgetAPI';
+// import { fetchAllData } from '../../utils/widgetAPI';
 
 export default function Widget2({ selectedOption, width, height }) {
-    const [data, setData] = useState(null);
+
+    const [data, setData] = useState({ station: { name: '' }, rainfall: [], humidity: [], temperature: [] });
 
     useEffect(() => {
-        if (selectedOption) {
-            fetchAllData(selectedOption.id)
-                .then(data => setData(data))
-                .catch(error => console.error('Error fetching station data:', error));
-        }
-
+        setData(generateData());
     }, [selectedOption]);
 
-    if (!data) {
-        return <div>Loading...</div>;
-    }
-
     return (
-        <div className='relative text-xl bg-white h-min text-slate-800 mx-auto rounded-3xl flex flex-col p-10 shadow-lg z-10 ' style={{ width, height }}>
+        <>
+        <hr/>
+        <div className='relative text-xl bg-white h-max text-slate-800 mx-auto flex flex-col p-10 shadow-lg z-10 ' style={{ width, height }}>
+            <h5 className='text-center'>CLIMATE STATION</h5>
+            <hr className='mb-6'/>
             <div className='relative flex justify-evenly'> 
-               
-                <div className='w-1/3 flex justify-evenly flex-col text-center'>
+
+                <div className='w-1/3 flex justify-evenly flex-col text-center text-xs'>
                     <span className='mx-auto'>                    
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-map-pin"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                     </span>
-                    {data.station.name}
+                    {String(selectedOption.name).toUpperCase()} 
                 </div>
                 
             </div>
@@ -36,12 +32,11 @@ export default function Widget2({ selectedOption, width, height }) {
             <div className='flex align-bottom justify-center h-max'>
                 <HumidityChartMap Data={data.humidity} />
             </div>
-            
-            {/* <div>
-                <span>Min: 18 Max: 36</span>
-                <span>Latest updated: 21min ago</span>
-            </div> */}
+            <div className='flex align-bottom justify-center h-max'>
+                {/* <TempratureChartMap Data={data.temperature} /> */}
+            </div>
         </div>  
+        </>
     );
 }
 
@@ -67,21 +62,21 @@ export const humidityoptions = {
 };
 
 export const tempratureoptions = {
-    title: "Temprature Over Time",
+    title: "Temperature Over Time",
     hAxis: { title: "Time", titleTextStyle: { color: "#333" } },
-    vAxis: { title: "Temprature (°C)", minValue: 0 },
-    chartArea: { width: "80%", height: "100%"   },
+    vAxis: { title: "Temperature (°C)", minValue: 0 },
+    chartArea: { width: "80%", height: "100%" },
 };
 
-export function HumidityChartMap({ Data}) {
+export function HumidityChartMap({ Data }) {
     if (!Data) {
         return <div>No humidity data available</div>;
     }
 
     const chartData = [["Time", "Humidity"]];
     Data.forEach((entry) => {
-    chartData.push([new Date(entry.time), entry.humidity]);
-});
+        chartData.push([new Date(entry.time), entry.humidity]);
+    });
     
     return (
         <Chart
@@ -93,15 +88,14 @@ export function HumidityChartMap({ Data}) {
     );
 }
 
-export function TempratureChartMap({ Data}) {
-
+export function TempratureChartMap({ Data }) {
     if (!Data) {
-        return <div>No temprature data available</div>;
+        return <div>No temperature data available</div>;
     }
     
-    const chartData = [["Time", "Temprature"]];
-        Data.forEach((entry) => {
-        chartData.push([new Date(entry.time), entry.temprature]);
+    const chartData = [["Time", "Temperature"]];
+    Data.forEach((entry) => {
+        chartData.push([new Date(entry.time), entry.temperature]);
     });
     
     return (
@@ -115,13 +109,13 @@ export function TempratureChartMap({ Data}) {
     );
 }
 
-export function RainfallChartMap({ Data}) {
+export function RainfallChartMap({ Data }) {
     if (!Data) {
         return <div>No rainfall data available</div>;
     }
     
     const chartData = [["Time", "Rainfall"]];
-        Data.forEach((entry) => {
+    Data.forEach((entry) => {
         chartData.push([new Date(entry.time), entry.rainfall]);
     });
     
@@ -134,4 +128,30 @@ export function RainfallChartMap({ Data}) {
         options={rainfalloptions}
         />
     );
+}
+
+function generateData() {
+    const data = {
+        station: {
+            name: `Station ${Math.floor(Math.random() * 100)}`,
+        },
+        rainfall: [],
+        humidity: [],
+        temperature: [],
+    };
+  
+    for (let i = 0; i < 24; i++) {
+        const time = new Date();
+        time.setHours(time.getHours() - i);
+  
+        const rainfall = Math.random() * 10;
+        const humidity = Math.random() * 100;
+        const temperature = Math.random() * 30; // Adjust this range based on your temperature data
+  
+        data.rainfall.push({ time: time.toISOString(), rainfall });
+        data.humidity.push({ time: time.toISOString(), humidity });
+        data.temperature.push({ time: time.toISOString(), temperature });
+    }
+  
+    return data;
 }
