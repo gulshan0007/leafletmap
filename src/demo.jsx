@@ -4,6 +4,7 @@ import Iii from './iii'; // Assuming Iii contains the widget component
 import Iii2 from './Iil2';
 import Widget from './components/widget/Widget';
 import Widget2 from './components/widget/Widget2';
+import Map from './components/crowdsrouce/map';
 
 function Demo() {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -14,8 +15,11 @@ function Demo() {
         <h1 className="text-center font-bold text-2xl">Mumbai Flood Warning System</h1>
       </header>
     <div className='flex w-full h-full'>
-      <div className='w-full h-full overflow-hidden'>
-        <Base setSelectedOption={setSelectedOption} selectedOption={selectedOption} setSelectedOption1={setSelectedOption1} selectedOption1={selectedOption1}/>
+      <div className='w-full h-full border border-black'>
+        <Base setSelectedOption={setSelectedOption} selectedOption={selectedOption} setSelectedOption1={setSelectedOption1} selectedOption1={selectedOption1}/>   
+      </div>
+      <div className='w-full h-full border border-black'>
+        <Map />
       </div>
       <div className='w-2/6'>
         <Widget selectedOption={selectedOption} height={'50%'}/>

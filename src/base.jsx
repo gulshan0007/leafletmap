@@ -5,6 +5,7 @@ import MarkerClusterGroup from "react-leaflet-cluster";
 import { useEffect, useState } from "react";
 import { fetchStations } from "./utils/widgetAPI";
 import { Icon, divIcon, point } from "leaflet";
+import Map from "./components/crowdsrouce/map";
 
 export default function Base(props) {
   const [stations, setStations] = useState([]);
@@ -37,39 +38,42 @@ export default function Base(props) {
     return <div>.</div>;
   } else {
     return (
-      <MapContainer center={[19.125704678751553, 72.90880620559894]} zoom={13}>
-        {/* OPEN STREEN MAPS TILES */}
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+      <div className="h-full w-full">
+        <MapContainer center={[19.125704678751553, 72.90880620559894]} zoom={13}>
+          {/* OPEN STREEN MAPS TILES */}
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
 
-        {/* First type of markers */}
-        <MarkerClusterGroup chunkedLoading iconCreateFunction={createClusterCustomIcon}>
-          {stations.map((station, index) => (
+          {/* First type of markers */}
+          <MarkerClusterGroup chunkedLoading iconCreateFunction={createClusterCustomIcon}>
+            {stations.map((station, index) => (
+              <Marker
+                key={index}
+                position={{ lat: station.latitude, lng: station.longitude }}
+                icon={customIcon}
+                eventHandlers={{ click: () => handleMarkerClick(station) }}
+              >
+                <Popup>{station.name}</Popup>
+              </Marker>
+            ))}
+          </MarkerClusterGroup>
+
+          {/* Second type of markers */}
+          {dummyMarkers.map((dummyMarker, index) => (
             <Marker
-              key={index}
-              position={{ lat: station.latitude, lng: station.longitude }}
-              icon={customIcon}
-              eventHandlers={{ click: () => handleMarkerClick(station) }}
+              key={`dummy-${index}`}
+              position={dummyMarker.position}
+              icon={blueCircleIcon}
+              eventHandlers={{ click: () => setSelectedOption1(dummyMarker) }}
             >
-              <Popup>{station.name}</Popup>
+              <Popup>{dummyMarker.name}</Popup>
             </Marker>
           ))}
-        </MarkerClusterGroup>
-
-        {/* Second type of markers */}
-        {dummyMarkers.map((dummyMarker, index) => (
-          <Marker
-            key={`dummy-${index}`}
-            position={dummyMarker.position}
-            icon={blueCircleIcon}
-            eventHandlers={{ click: () => setSelectedOption1(dummyMarker) }}
-          >
-            <Popup>{dummyMarker.name}</Popup>
-          </Marker>
-        ))}
-      </MapContainer>
+        </MapContainer>
+        {/* <Map /> */}
+      </div>
     );
   }
 }
