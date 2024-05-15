@@ -32,7 +32,7 @@ export default function Widget({ selectedOption, width, height }) {
                     </div>
                     <div className='flex flex-col text-center'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#47a0ff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="feather feather-wind"><path d="M12 4V2m0 20v-2m8-8h-2m-16 0H4m16-8l-2-2m0 16 2-2m-2-8H4"/></svg>
-                        {data.data.windSpeed}
+                        {data.data.windSpeed} overflow-hidden'
                     </div>
                 </div>
                 <div className='w-1/3 flex justify-evenly flex-col text-center'>
