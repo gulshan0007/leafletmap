@@ -57,23 +57,25 @@ function Map() {
   }
 
   return (
-        <MapContainer 
-          center={[19.2, 72.8]} 
-          zoom={12.4}
-          style={{ height: '100vh', }}
-          minZoom={12.4}
-          maxZoom={20}
-          maxBounds={[
-            [19.7, 72.4], 
-            [18.85, 73.2]  
-          ]}
-        >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          {markers}
-        </MapContainer>
+    <div style={{ height: 'calc(100vh - 64px)', width: '100%' }}>
+      <MapContainer 
+        center={[19.2, 72.8]} 
+        zoom={12.4}
+        style={{ height: '100%', width: '100%' }}
+        minZoom={12.4}
+        maxZoom={20}
+        maxBounds={[
+          [19.7, 72.4], 
+          [18.85, 73.2]  
+        ]}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        {markers}
+      </MapContainer>
+    </div>
   );
 }
 
