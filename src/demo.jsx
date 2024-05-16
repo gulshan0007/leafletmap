@@ -1,27 +1,28 @@
 import React, { useState } from 'react';
 import Base from './base'; // Assuming Base contains the map component
+import Base2 from './base2';
 import Map from './components/crowdsrouce/map';
 import Widget from './components/widget/Widget'; // Import the Widget component
+import Widget2 from './components/widget/Widget2'; // Import the Widget component
+import Header from './components/Header';
+// Import the Widget component
 
 function Demo() {
   const [selectedTab, setSelectedTab] = useState('Base');
-  const [selectedOption, setselectedOption] = useState(null); // State to hold selected marker data
+  
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption1, setSelectedOption1] = useState(null);
 
   // Function to handle marker click
   const handleMarkerClick = (marker) => {
-    setselectedOption(marker);
-    setSelectedTab('Base'); // Switch tab to Map when marker is clicked
-  };
-
-  const setSelectedOption = (option) => {
-    console.log(option); // Just for testing
+    setSelectedOption(marker);
   };
 
   return (
-    <div className='flex flex-col h-screen w-screen absolute top-0'>
-      <header className='bg-white h-16 flex items-center justify-center shadow-2xl border-b-2 border-black'>
-        <h1 className="text-center font-bold text-2xl">Mumbai Flood Warning System</h1>
-      </header>
+    <>
+    <Header/>
+    <div className='flex flex-col h-screen w-screen absolute top-20 right-0'>
+      
       <div className=' flex w-full h-full'>
         <div className='w-full pl-2 pr-2 shadow-2xl border-b-2 border-black'>
           <div 
@@ -53,21 +54,40 @@ function Demo() {
               >
                 <span className="text-gray-800">Map</span>
               </button>
+              <button
+                role="tab"
+                aria-selected={selectedTab === 'Base2'}
+                aria-controls="panel-1"
+                id="tab-1"
+                tabIndex={selectedTab === 'Base2' ? 0 : -1}
+                className={`relative block h-10 px-6 tab rounded-full ${selectedTab === 'Base2' ? 'bg-gray-200 text-black-900 font-bold text-lg' : 'bg-gray-100 hover:bg-gray-200 text-white-700'}`}
+                onClick={() => setSelectedTab('Base2')}
+              >
+                <span className="text-gray-800">Base2</span>
+              </button>
               
             </div>
           </div>
           
-          {selectedTab === 'Base' && <Base handleMarkerClick={handleMarkerClick} setSelectedOption={setSelectedOption} />} {/* Pass setSelectedOption as prop */}
+          {selectedTab === 'Base' && <Base setSelectedOption={setSelectedOption} />} {/* Pass setSelectedOption as prop */}
+          {selectedTab === 'Base2' && <Base2 setSelectedOption={setSelectedOption1} />} {/* Pass setSelectedOption as prop */}
           {selectedTab === 'Map' && <Map />}
         </div>
-        {selectedOption && selectedTab === 'Base' && (
-          <div className="absolute top-0 left-0 w-full h-full">
-            <Widget selectedOption={selectedOption} /> {/* Render Widget component */}
-          </div>
-        )}
       </div>
+      {selectedOption && selectedTab === 'Base' && (
+        <div className="absolute top-10 left-10 z-50">
+          <Widget selectedOption={selectedOption} /> {/* Render Widget component */}
+        </div>
+      )}
+      {selectedOption && selectedTab === 'Base2' && (
+        <div className="absolute top-10 left-10 z-50">
+          <Widget2 selectedOption1={selectedOption1} /> {/* Render Widget component */}
+        </div>
+      )}
     </div>
+    </>
   );
 }
 
 export default Demo;
+

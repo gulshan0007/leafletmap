@@ -21,7 +21,7 @@ export default function Widget({ selectedOption, width, height }) {
     return (
         <>
         <hr/>
-        <div className='relative text-xl bg-white h-max text-slate-800 mx-auto flex flex-col p-10 shadow-lg z-10 ' style={{ width, height }}>
+        <div className='relative text-xl bg-black bg-opacity-40 h-max text-slate-800 mx-auto flex flex-col p-10 shadow-lg z-10 ' style={{ width, height }}>
         <h3 className='text-center'>MRDM STATION</h3>
         <hr className='mb-6'/>
             <div className='relative flex justify-evenly'> 

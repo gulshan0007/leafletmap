@@ -7,7 +7,7 @@ import { fetchStations } from "./utils/widgetAPI";
 import { Icon, divIcon, point } from "leaflet";
 import Widget from "./components/widget/Widget"; // Import the Widget component
 
-export default function Base(props) {
+export default function Base2(props) {
   const [stations, setStations] = useState([]);
   const { setSelectedOption, selectedOption } = props;
 
@@ -44,21 +44,19 @@ export default function Base(props) {
           />
 
           {/* First type of markers */}
-          <MarkerClusterGroup chunkedLoading iconCreateFunction={createClusterCustomIcon}>
-            {stations.map((station, index) => (
-              <Marker
-                key={index}
-                position={{ lat: station.latitude, lng: station.longitude }}
-                icon={customIcon}
-                eventHandlers={{ click: () => handleMarkerClick(station) }}
-              >
-                <Popup>{station.name}</Popup>
-              </Marker>
-            ))}
-          </MarkerClusterGroup>
+          
 
-         
-
+          {/* Second type of markers */}
+          {dummyMarkers.map((dummyMarker, index) => (
+            <Marker
+              key={`dummy-${index}`}
+              position={dummyMarker.position}
+              icon={blueCircleIcon}
+              eventHandlers={{ click: () => setSelectedOption1(dummyMarker) }}
+            >
+              <Popup>{dummyMarker.name}</Popup>
+            </Marker>
+          ))}
         </MapContainer>
         {/* Widget Component */}
         {selectedOption && (
@@ -85,6 +83,12 @@ const blueCircleIcon = divIcon({
 });
 
 // Define dummy markers for the second type of markers
+const dummyMarkers = [
+  { position: [19.1, 72.9], name: "Dummy Marker 1" },
+  { position: [19.11, 72.92], name: "Dummy Marker 2" },
+  { position: [19.12, 72.94], name: "Dummy Marker 3" },
+  { position: [19.13, 72.96], name: "Dummy Marker 4" }
+];
 
 const createClusterCustomIcon = function (cluster) {
   return new divIcon({
