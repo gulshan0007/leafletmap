@@ -1,16 +1,38 @@
-
+body, html {
+    margin: 0;
+    padding: 0;
+}
 .who-we-are {
     font-family: Arial, sans-serif;
-    padding: 20px;
+    
     width: 100%;
 
     background-color: #EDF0F2;
+    padding: 0;
+    margin: 0;
 }
 
 .who-we-are h1 {
     text-align: center;
     background-color: #F6B800;
     padding: 10px 0;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-section {
+    width: 70%;
+    margin-left: 40px;
+    margin-top: 20px;
+}
+.right-section{
+    width: 30%;
+    margin-top: 20px;
 }
 
 .section {
@@ -18,7 +40,8 @@
 }
 
 .section h2 {
-    font-size: 1.5em;
+    font-size: 2em;
+    font-weight: bolder;
     margin-bottom: 10px;
 }
 
@@ -36,7 +59,10 @@
     padding: 10px;
     border-radius: 5px;
 }
-
+.iit-team h2{
+    font-size: 2em;
+    font-weight: bolder;
+}
 .iit-team ul {
     list-style-type: none;
     padding: 0;
@@ -50,4 +76,5 @@
     font-size: 0.9em;
     color: gray;
     margin-top: 10px;
+    font-style: italic;
 }
