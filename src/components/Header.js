@@ -1,32 +1,31 @@
 import React from 'react';
-import './style.css'; // assuming you have the styles in a file named style.css
+import { Link } from 'react-router-dom';
 
 function Header() {
     return (
-        <header>
-            <input type="checkbox" name="" id="chk1" />
-            <div className="logo"><h1>Mumbai Flood Warning System</h1></div>
-            <div className="search-box">
-                <form>
-                    <input type="text" name="search" id="srch" placeholder="Search" />
-                    <button type="submit"><i className="fa fa-search"></i></button>
-                </form>
-            </div>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Product</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Contact</a></li>
-                <li>
-                    <a href="#"><i className="fa fa-facebook"></i></a>
-                    <a href="#"><i className="fa fa-twitter"></i></a>
-                    <a href="#"><i className="fa fa-instagram"></i></a>
-                </li>
-            </ul>
-            <div className="menu">
-                <label htmlFor="chk1">
-                    <i className="fa fa-bars"></i>
-                </label>
+        <header className="h-20 mx-auto shadow-xl bg-white z-20 flex flex-col justify-center">
+            <div className="h-full flex justify-evenly text-center w-11/12">
+                <div className='h-full flex gap-5 mt-[.5rem]'>
+                    <img src="/img/hdfcergo.png" alt="logo" style={{height: '4rem'}} />
+                    <img src="/img/iitb.png" alt="logo" className='' 
+                    style={{ height: '4rem' }}
+                    />
+                </div>
+                <h1 className='font-bold text-2xl flex flex-col justify-center'>Mumbai Flood Warning System</h1>
+                <ul className="flex space-x-5 h-full">
+                    <li>
+                        <Link to="/" className="hover:underline h-full bold text-lg flex flex-col justify-center hover:text-violet-500">Home</Link>
+                    </li>
+                    <li>
+                        <Link to="/train" className="hover:underline h-full bold text-lg flex flex-col justify-center hover:text-violet-500">Train</Link>
+                    </li>
+                    <li>
+                        <Link to="#" className="hover:underline h-full bold text-lg flex flex-col justify-center hover:text-violet-500">Past Data</Link>
+                    </li>
+                    <li>
+                        <Link to="#" className="hover:underline h-full bold text-lg flex flex-col justify-center hover:text-violet-500">About</Link>
+                    </li>
+                </ul>
             </div>
         </header>
     );
