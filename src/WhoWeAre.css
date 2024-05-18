@@ -1,0 +1,53 @@
+
+.who-we-are {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    width: 100%;
+
+    background-color: #EDF0F2;
+}
+
+.who-we-are h1 {
+    text-align: center;
+    background-color: #F6B800;
+    padding: 10px 0;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.section h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.partners {
+    display: flex;
+    gap: 20px;
+}
+
+.partners img {
+    height: 100px;
+}
+
+.iit-team {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.iit-team ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.iit-team li {
+    margin-bottom: 5px;
+}
+
+.iit-team p {
+    font-size: 0.9em;
+    color: gray;
+    margin-top: 10px;
+}
