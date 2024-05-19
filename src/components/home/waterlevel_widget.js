@@ -18,6 +18,8 @@ const fetchCurrentWeather = async (latitude, longitude) => {
     const currentDate = new Date().toLocaleDateString();
     const currentTime = new Date().toLocaleTimeString();
 
+    console.log('Weather data:', weatherData);
+    
     return {
         temperature: weatherData.main.temp,
         date: currentDate,
@@ -39,7 +41,7 @@ export default function Widget2({ selectedOption, width, height }) {
     }, [selectedOption]);
 
     return (
-        <div className='relative text-xl bg-black bg-opacity-40 rounded-xl text-white h-max text-slate-800 mx-auto flex flex-col p-10 shadow-lg z-10' style={{ width, height }}>
+        <div className='relative text-xl bg-black bg-opacity-40 rounded-xl h-max text-slate-800 mx-auto flex flex-col p-10 shadow-lg z-10' style={{ width, height }}>
             {currentWeather ? (
                 <>
                     <div className='relative flex justify-evenly'>
