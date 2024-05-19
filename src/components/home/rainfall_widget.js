@@ -18,6 +18,7 @@ const fetchCurrentWeather = async (latitude, longitude) => {
     const weatherData = response.data;
     const currentDate = new Date().toLocaleDateString();
     const currentTime = new Date().toLocaleTimeString();
+    console.log(weatherData);
     return {
         temperature: weatherData.main.temp,
         date: currentDate,
