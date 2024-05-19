@@ -10,7 +10,7 @@ import pic7 from '../icons/Picture7.png';
 
 const Past = () => {
   return (
-    <div className="past container-xxl bg-white p-0">
+    <div className="past container-xxl bg-wheat p-0">
       <div className="container-xxl py-5">
         <div className="container py-5 px-lg-5">
           <div className="wow fadeInUp" data-wow-delay="0.1s">

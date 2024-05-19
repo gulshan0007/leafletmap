@@ -33,7 +33,6 @@ export default function Widget2({ selectedOption, width, height }) {
                 <HumidityChartMap Data={data.humidity} />
             </div>
             <div className='flex align-bottom justify-center h-max'>
-                {/* <TempratureChartMap Data={data.temperature} /> */}
             </div>
         </div>  
         </>
