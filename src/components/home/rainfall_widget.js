@@ -3,28 +3,7 @@ import { Chart } from 'react-google-charts';
 import axios from 'axios';
 import { fetchAllData } from '../../utils/widgetAPI';
 
-const API_KEY = '4761a28e4582cafbc812853a09da0b61'; // Replace with your OpenWeatherMap API key
 
-// Function to fetch current weather data
-const fetchCurrentWeather = async (latitude, longitude) => {
-    const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
-        params: {
-            lat: latitude,
-            lon: longitude,
-            units: 'metric',
-            appid: API_KEY
-        }
-    });
-    const weatherData = response.data;
-    const currentDate = new Date().toLocaleDateString();
-    const currentTime = new Date().toLocaleTimeString();
-    console.log(weatherData);
-    return {
-        temperature: weatherData.main.temp,
-        date: currentDate,
-        time: currentTime
-    };
-};
 
 export default function Widget({ selectedOption }) {
     const [data, setData] = useState(null);
@@ -35,11 +14,6 @@ export default function Widget({ selectedOption }) {
             fetchAllData(selectedOption.id)
                 .then(data => setData(data))
                 .catch(error => console.error('Error fetching station data:', error));
-
-            // Fetch current weather data
-            fetchCurrentWeather(selectedOption.latitude, selectedOption.longitude)
-                .then(weather => setCurrentWeather(weather))
-                .catch(error => console.error('Error fetching current weather:', error));
         }
     }, [selectedOption]);
 
@@ -48,14 +22,12 @@ export default function Widget({ selectedOption }) {
     }
 
     return (
-        <div className='relative text-xl w-max bg-black bg-opacity-40 rounded-xl text-white h-max text-slate-800 mx-auto flex flex-col p-10 shadow-lg z-10'>
+        <div className='relative text-xl w-max bg-black bg-opacity-40 rounded-xl text-white h-max mx-auto flex flex-col p-10 shadow-lg z-10'>
             <div className='relative flex justify-evenly'>
                 {/* Display current date, time, and temperature */}
                 <div className='w-1/3 flex justify-evenly'>
                     <div className='flex flex-col text-center'>
-                        <span style={{ fontSize: '2rem', color: '#ff4500' }}>{currentWeather.temperature}°C</span>
-                        <span>{currentWeather.date}</span>
-                        
+                        <span style={{ fontSize: '2rem', color: '#ff4500' }}>{data.data.temperature}°C</span>                        
                     </div>
                 </div>
                 {/* Keep other sections as it is */}

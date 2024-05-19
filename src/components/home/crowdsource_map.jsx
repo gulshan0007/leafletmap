@@ -8,6 +8,7 @@ import 'leaflet/dist/leaflet.css';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import Widget from './rainfall_widget';
+import Form from './form';
 
 // Configure the default icon
 let DefaultIcon = L.icon({
@@ -76,6 +77,9 @@ function Map() {
         />
         {markers}
       </MapContainer>
+      <div className='absolute top-28 left-10 p-4bg-opacity-50 rounded-lg shadow-lg z-20'>
+        <Form />
+      </div>
    
     </div>
   );
