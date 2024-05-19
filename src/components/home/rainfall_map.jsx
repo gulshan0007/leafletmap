@@ -6,12 +6,12 @@ import { fetchStations } from "../../utils/widgetAPI";
 import { Icon, divIcon, point } from "leaflet";
 import Widget from "./rainfall_widget"; 
 
-export default function RainFallMap(props) {
+export default function RainFallMap({location, setLocations}) {
   const [stations, setStations] = useState([]);
-  const [selectedOption, setSelectedOption] = useState(null);
+  
 
   const handleMarkerClick = (marker) => {
-    setSelectedOption(marker);
+    setLocations(marker);
   };
 
   useEffect(() => {
@@ -19,37 +19,24 @@ export default function RainFallMap(props) {
       try {
         const data = await fetchStations();
         setStations(data);
-        if (!selectedOption) {
-          setSelectedOption(data[0]);
+        if (!location) {
+          setLocations(data[1]);
+          console.log('rainfall map', location.id)
+
         }
       } catch (error) {
         console.error("Error fetching stations:", error);
       }
     };
 
-    fetchStationsData();
+    fetchStationsData();  
   }, []);
 
   if (!stations) {
     return <div>.</div>;
   } else {
     return (
-      <div className="h-full w-full relative">
-        <MapContainer
-          className='h-full w-full relative z-10'
-          center={[19.14, 72,2]}
-          zoom={12.4}
-          minZoom={12.4}
-          maxZoom={21}
-          maxBounds={[
-            [19.4, 72.6],
-            [18.85, 73.2]
-          ]}
-        >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
+      <>
           <MarkerClusterGroup chunkedLoading iconCreateFunction={createClusterCustomIcon}>
             {stations.map((station, index) => (
               <Marker
@@ -62,16 +49,7 @@ export default function RainFallMap(props) {
               </Marker>
             ))}
           </MarkerClusterGroup>
-
-        
-
-        </MapContainer>
-        {selectedOption && (
-          <div className="absolute top-28 left-10 z-20">
-            <Widget selectedOption={selectedOption} />
-          </div>
-        )}
-      </div>
+        </>
     );
   }
 }

@@ -59,29 +59,9 @@ function Map() {
   }
 
   return (
-    <div className="h-full w-full relative">
-        <MapContainer
-          className='h-full w-full relative z-10'
-          center={[19.14, 72,2]}
-          zoom={12.4}
-          minZoom={12.4}
-          maxZoom={21}
-          maxBounds={[
-            [19.4, 72.6],
-            [18.85, 73.2]
-          ]}
-        >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {markers}
-      </MapContainer>
-      <div className='absolute top-28 left-10 p-4bg-opacity-50 rounded-lg shadow-lg z-20'>
-        <Form />
-      </div>
-   
-    </div>
+    <>
+        {markers}   
+    </>
   );
 }
 

@@ -61,7 +61,7 @@ function Form() {
                     <label htmlFor="name" className="block text-white mb-2">Name:</label>
                     <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} className="w-full border rounded-md py-2 px-4 mb-4 bg-blue-50 text-slate-900" />
 
-                    <label htmlFor="height" className="block text-white mb-2">Height (cm):</label>
+                    <label htmlFor="height" className="block text-white mb-2">your Height (cm):</label>
                     <input type="number" id="height" name="height" value={height} onChange={(e) => setHeight(e.target.value)} className="w-full border rounded-md py-2 px-4 mb-4 bg-blue-50 text-white" required />
 
                     <div className="mb-4">
