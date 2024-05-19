@@ -4,9 +4,7 @@ body, html {
 }
 .who-we-are {
     font-family: Arial, sans-serif;
-    
     width: 100%;
-
     background-color: #EDF0F2;
     padding: 0;
     margin: 0;
@@ -30,7 +28,8 @@ body, html {
     margin-left: 40px;
     margin-top: 20px;
 }
-.right-section{
+
+.right-section {
     width: 30%;
     margin-top: 20px;
 }
@@ -59,10 +58,12 @@ body, html {
     padding: 10px;
     border-radius: 5px;
 }
-.iit-team h2{
+
+.iit-team h2 {
     font-size: 2em;
     font-weight: bolder;
 }
+
 .iit-team ul {
     list-style-type: none;
     padding: 0;
@@ -77,4 +78,18 @@ body, html {
     color: gray;
     margin-top: 10px;
     font-style: italic;
+}
+
+.social-media-icons {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.social-media-icons img {
+    width: 40px;
+    height: 40px;
 }

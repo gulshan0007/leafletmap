@@ -1,9 +1,5 @@
   import React, { useState } from 'react';
-  import Base from '../base'; // Assuming Base contains the map component
-  import Base2 from '../base2';
-  import Map from '../components/home/crowdsource_map';
-  import Widget from '../components/home/rainfall_widget'; // Import the Widget component
-  import Widget2 from '../components/widget/Widget2'; // Import the Widget component
+  import Map from '../components/home/crowdsource_map'; // Import the Widget component
   import Header from '../components/Header';
 import RainFallMap from '../components/home/rainfall_map';
 import WaterlevelMap from '../components/home/waterlevel_map';
@@ -14,7 +10,7 @@ import WaterlevelMap from '../components/home/waterlevel_map';
 
     return (
     <div className='h-screen w-screen'>
-      <Header />
+      
       <div className='w-full h-full relative'> 
         <div className="absolute z-20 top-10 left-1/3  w-screen/4 shadow mx-auto flex justify-center align-middle">
           <span

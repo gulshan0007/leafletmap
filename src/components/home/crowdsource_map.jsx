@@ -1,19 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { MapContainer, TileLayer, Marker, Popup, CircleMarker } from 'react-leaflet';
-import L from 'leaflet';
+import { MapContainer, TileLayer, Marker, CircleMarker } from 'react-leaflet';
+import L from 'leaflet'; // Import Leaflet
 import 'leaflet/dist/leaflet.css';
 
-// Fix for default icon
-delete L.Icon.Default.prototype._getIconUrl;
+// Import the default icon images
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+import Widget from './rainfall_widget';
 
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-  iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+// Configure the default icon
+let DefaultIcon = L.icon({
+    iconUrl: markerIcon,
+    shadowUrl: markerShadow,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
 });
 
-function CrowdSourceMap() {
+// Set the default icon to be used for all markers
+L.Marker.prototype.options.icon = DefaultIcon;
+
+function Map() {
   const [markers, setMarkers] = useState([]);
   const [mapData, setMapData] = useState(null);
 
@@ -24,7 +33,7 @@ function CrowdSourceMap() {
         if (!response.data || !Array.isArray(response.data)) {
           throw new Error('Invalid map data format');
         }
-        setMapData(response.data);
+        setMapData(response.data); 
       } catch (error) {
         console.error('Error fetching map data:', error);
       }
@@ -33,20 +42,11 @@ function CrowdSourceMap() {
   }, []);
 
   useEffect(() => {
-    if (mapData) {
+    if (mapData) { 
       const leafletMarkers = mapData.map((marker) => (
-        <Marker key={`${marker.latitude}-${marker.longitude}`} position={[marker.latitude, marker.longitude]}>
-          <Popup>
-            <div>
-              <h3>Location Information</h3>
-              <p>Water Level: {marker.waterlevel}</p>
-            </div>
-          </Popup>
-          <CircleMarker 
-            center={[marker.latitude, marker.longitude]} 
-            radius={marker.waterlevel / 2} 
-            color="blue"
-          />
+        <Marker key={marker.latitude + marker.longitude} position={[marker.latitude, marker.longitude]}>
+          <CircleMarker center={[marker.latitude, marker.longitude]} radius={marker.waterlevel / 2}>
+          </CircleMarker>
         </Marker>
       ));
       setMarkers(leafletMarkers);
@@ -58,25 +58,27 @@ function CrowdSourceMap() {
   }
 
   return (
-    <MapContainer
-    className='h-full w-full relative z-10'
-    center={[19.14, 72,2]}
-    zoom={12.4}
-    minZoom={12.4}
-    maxZoom={21}
-    maxBounds={[
-      [19.4, 72.6],
-      [18.85, 73.2]
-    ]}
-  >
-    
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      {markers}
-    </MapContainer>
+    <div className="h-full w-full relative">
+        <MapContainer
+          className='h-full w-full relative z-10'
+          center={[19.14, 72,2]}
+          zoom={12.4}
+          minZoom={12.4}
+          maxZoom={21}
+          maxBounds={[
+            [19.4, 72.6],
+            [18.85, 73.2]
+          ]}
+        >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        {markers}
+      </MapContainer>
+   
+    </div>
   );
 }
 
-export default CrowdSourceMap;
+export default Map;

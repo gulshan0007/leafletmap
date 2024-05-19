@@ -20,10 +20,10 @@ function Header() {
                         <Link to="/train" className="hover:underline h-full bold text-lg flex flex-col justify-center hover:text-violet-500">Train</Link>
                     </li>
                     <li>
-                        <Link to="#" className="hover:underline h-full bold text-lg flex flex-col justify-center hover:text-violet-500">Past Data</Link>
+                        <Link to="/past" className="hover:underline h-full bold text-lg flex flex-col justify-center hover:text-violet-500">Past Data</Link>
                     </li>
                     <li>
-                        <Link to="#" className="hover:underline h-full bold text-lg flex flex-col justify-center hover:text-violet-500">About</Link>
+                        <Link to="/about" className="hover:underline h-full bold text-lg flex flex-col justify-center hover:text-violet-500">About</Link>
                     </li>
                 </ul>
             </div>
