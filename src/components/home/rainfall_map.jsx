@@ -20,7 +20,7 @@ export default function RainFallMap({location, setLocations}) {
         const data = await fetchStations();
         setStations(data);
         if (!location) {
-          setLocations(data[1]);
+          setLocations(data[0]);
           console.log('rainfall map', location.id)
 
         }

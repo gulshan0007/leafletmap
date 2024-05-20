@@ -4,18 +4,22 @@ import { Chart } from 'react-google-charts';
 
 export default function WaterlevelWidget({ selectedOption, width, height }) {
 
-    const [data, setData] = useState({ station: { name: '' }, rainfall: [], humidity: [], temperature: [] });
+    const [data, setData] = useState({ station: { name: '' }, rainfall: [], humidity: [], temperature: [], waterLevel: [] });
+    const [selectedStation, setSelectedStation] = useState(null);
 
     useEffect(() => {
         setData(generateData());
     }, [selectedOption]);
 
+    const handleStationClick = (stationIndex) => {
+        setSelectedStation(stationIndex);
+    };
+
     return (
-        <div className='relative text-xl bg-black bg-opacity-40 h-max text-slate-800 mx-auto flex flex-col p-10 shadow-lg z-10 ' style={{ width, height }}>
+        <div className='relative text-xl w-max bg-black rounded-xl bg-opacity-40 text-white h-max mx-auto flex flex-col p-10 shadow-lg z-10 ' style={{ width, height }}>
             <h5 className='text-center'>CLIMATE STATION</h5>
             <hr className='mb-6'/>
             <div className='relative flex justify-evenly'> 
-
                 <div className='w-1/3 flex justify-evenly flex-col text-center text-xs'>
                     <span className='mx-auto'>                    
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-map-pin"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -25,103 +29,70 @@ export default function WaterlevelWidget({ selectedOption, width, height }) {
                 
             </div>
             <div className='flex align-bottom justify-center h-max relative'>
-                <RainfallChartMap Data={data.rainfall} />
-            </div>
-            <div className='flex align-bottom justify-center h-max'>
-                <HumidityChartMap Data={data.humidity} />
-            </div>
-            <div className='flex align-bottom justify-center h-max'>
+                <WaterLevelChart data={data.waterLevel} selectedStation={selectedStation} onStationClick={handleStationClick} />
             </div>
         </div>  
     );
 }
 
-export const options = {
-  title: "Rainfall Over Time",
-  hAxis: { title: "Time", titleTextStyle: { color: "#333" } },
-  vAxis: { title: "Rainfall (mm)", minValue: 0 },
-  chartArea: { width: "80%", height: "40%" },
+const waterLevelOptions = {
+    title: "Water Level of 9 Stations",
+    titleTextStyle: { color: "red", fontSize: 16, bold: true, align: 'center' },
+    hAxis: { 
+        title: "Stations", 
+        titleTextStyle: { color: "#fff" }, 
+        textStyle: { color: "#fff" },
+        slantedText: true,
+        slantedTextAngle: 45 
+    },
+    vAxis: { 
+        title: "Water Level",  
+        titleTextStyle: { color: "#fff" },
+        textStyle: { color: "#fff" }, fontSize: 16,
+        minValue: 0 
+    },
+    chartArea: { width: "80%", height: "70%" },
+    backgroundColor: 'transparent',
+    legend: { position: 'none' },
+    animation: {
+        duration: 1000,
+        easing: 'out',
+        startup: true,
+    },
+    selectionMode: 'multiple',
+    colors: ['#76A7FA', '#76A7FA', '#76A7FA', '#76A7FA', '#76A7FA', '#76A7FA', '#76A7FA', '#76A7FA', '#76A7FA'],
 };
 
-export const rainfalloptions = {
-    title: "Rainfall Over Time",
-    hAxis: { title: "Time", titleTextStyle: { color: "#333" } },
-    vAxis: { title: "Rainfall (mm)", minValue: 0 },
-    chartArea: { width: "80%", height: "40%"},
-};
-
-export const humidityoptions = {
-    title: "Humidity Over Time",
-    hAxis: { title: "Time", titleTextStyle: { color: "#333" } },
-    vAxis: { title: "Humidity (%)", minValue: 0 },
-    chartArea: { width: "80%", height: "40%" },
-};
-
-export const tempratureoptions = {
-    title: "Temperature Over Time",
-    hAxis: { title: "Time", titleTextStyle: { color: "#333" } },
-    vAxis: { title: "Temperature (°C)", minValue: 0 },
-    chartArea: { width: "80%", height: "100%" },
-};
-
-export function HumidityChartMap({ Data }) {
-    if (!Data) {
-        return <div>No humidity data available</div>;
+export function WaterLevelChart({ data, selectedStation, onStationClick }) {
+    if (!data) {
+        return <div>No water level data available</div>;
     }
 
-    const chartData = [["Time", "Humidity"]];
-    Data.forEach((entry) => {
-        chartData.push([new Date(entry.time), entry.humidity]);
+    const chartData = [["Station", "Water Level"]];
+    data.forEach((entry, index) => {
+        chartData.push([`Station ${index + 1}`, entry]);
     });
+
+    const chartEvents = [
+        {
+            eventName: 'select',
+            callback({ chartWrapper }) {
+                const chart = chartWrapper.getChart();
+                const selection = chart.getSelection();
+                const stationIndex = selection[0].row - 1; // Subtract 1 to adjust for header row
+                onStationClick(stationIndex);
+            },
+        },
+    ];
     
     return (
         <Chart
-        chartType="AreaChart"
-        width="100%"
-        data={chartData}
-        options={humidityoptions}
-        />
-    );
-}
-
-export function TempratureChartMap({ Data }) {
-    if (!Data) {
-        return <div>No temperature data available</div>;
-    }
-    
-    const chartData = [["Time", "Temperature"]];
-    Data.forEach((entry) => {
-        chartData.push([new Date(entry.time), entry.temperature]);
-    });
-    
-    return (
-        <Chart
-        chartType="AreaChart"
-        width="50%"
-        height="100px"
-        data={chartData}
-        options={tempratureoptions}
-        />
-    );
-}
-
-export function RainfallChartMap({ Data }) {
-    if (!Data) {
-        return <div>No rainfall data available</div>;
-    }
-    
-    const chartData = [["Time", "Rainfall"]];
-    Data.forEach((entry) => {
-        chartData.push([new Date(entry.time), entry.rainfall]);
-    });
-    
-    return (
-        <Chart
-        chartType="AreaChart"
-        width="100%"
-        height="100px"
-        data={chartData}
-        options={rainfalloptions}
+            chartType="ColumnChart"
+            width="150%"
+            height="400px"
+            data={chartData}
+            options={waterLevelOptions}
+            chartEvents={chartEvents}
         />
     );
 }
@@ -134,19 +105,12 @@ function generateData() {
         rainfall: [],
         humidity: [],
         temperature: [],
+        waterLevel: [],
     };
-  
-    for (let i = 0; i < 24; i++) {
-        const time = new Date();
-        time.setHours(time.getHours() - i);
-  
-        const rainfall = Math.random() * 10;
-        const humidity = Math.random() * 100;
-        const temperature = Math.random() * 30; // Adjust this range based on your temperature data
-  
-        data.rainfall.push({ time: time.toISOString(), rainfall });
-        data.humidity.push({ time: time.toISOString(), humidity });
-        data.temperature.push({ time: time.toISOString(), temperature });
+
+    // Dummy data for water level of 9 stations
+    for (let i = 0; i < 9; i++) {
+        data.waterLevel.push(Math.floor(Math.random() * 100)); // Random water level values
     }
   
     return data;
