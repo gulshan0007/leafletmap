@@ -3,9 +3,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import Home from './pages/home'
 import TrainFlood from './pages/trainflood'
-import WhoWeAre from './whoweare'
 import Past from './pages/past'
 import Header from './components/Header'
+import WhoWeAre from './pages/whoweare'
 
 
 function App() {

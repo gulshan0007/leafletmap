@@ -1,20 +1,20 @@
 import React from 'react';
-import './WhoWeAre.css';
-import Header from './components/Header';
-import iitbLogo from './iitb.png';
-import csLogo from '../src/icons/cs.png';
-import hdfcLogo from '../src/icons/hdfc.png';
-import mcmrLogo from '../src/icons/mcmr.png';
-import instagramIcon from '../src/icons/instagram.png';
-import twitterIcon from '../src/icons/twitter.png';
-import youtubeIcon from '../src/icons/youtube.png';
-import facebookIcon from '../src/icons/facebook.png';
+import '../WhoWeAre.css';
+import Header from '../components/Header';
+import iitbLogo from '../iitb.png';
+import csLogo from '../icons/cs.png';
+import hdfcLogo from '../icons/hdfc.png';
+import mcmrLogo from '../icons/mcmr.png';
+import instagramIcon from '../icons/instagram.png';
+import twitterIcon from '../icons/twitter.png';
+import youtubeIcon from '../icons/youtube.png';
+import facebookIcon from '../icons/facebook.png';
 
 const WhoWeAre = () => {
     return (
         <>
             {/* <Header/> */}
-            <div className="who-we-are">
+            <div className="who-we-are h-full">
                 <h1>WHO WE ARE</h1>
                 <div className="content">
                     <div className="left-section">

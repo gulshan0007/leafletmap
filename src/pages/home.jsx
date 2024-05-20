@@ -1,12 +1,18 @@
-  import React, { useState } from 'react';
-  import Map from '../components/home/crowdsource_map'; // Import the Widget component
-  import Header from '../components/Header';
+import React, { useState } from 'react';
+import Map from '../components/home/crowdsource_map'; 
 import RainFallMap from '../components/home/rainfall_map';
 import WaterlevelMap from '../components/home/waterlevel_map';
-  // Import the Widget component
+import { MapContainer, TileLayer } from 'react-leaflet';
+import Form from '../components/home/form';
+import RainfallWidget from '../components/home/rainfall_widget';
+import WaterlevelWidget from '../components/home/waterlevel_widget';
 
   function Home() {
     const [selectedTab, setSelectedTab] = useState(1);
+
+    const [rainfallLocations, setRainfallLocations] = useState(null);
+    const [waterlevelLocations, setWaterlevelLocations] = useState(null);
+
 
     return (
     <div className='h-screen w-screen'>
@@ -27,10 +33,45 @@ import WaterlevelMap from '../components/home/waterlevel_map';
           >Public Data</span>
         </div>
 
-        <div className='h-full w-full z-10'>
-          {selectedTab === 1 && <RainFallMap/>}
-          {selectedTab === 2 && <WaterlevelMap/>}
-          {selectedTab === 3 && <Map />}
+        <div className='h-full w-full relative z-10'>
+          <MapContainer
+            className='h-full w-full relative z-10'
+            center={[19.14, 72,2]}
+            zoom={12.4}
+            minZoom={12.4}
+            maxZoom={21}
+            maxBounds={[
+              [19.4, 72.6],
+              [18.85, 73.2]
+            ]}
+          >
+              <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+              {selectedTab === 1 && <RainFallMap  setLocations={setRainfallLocations} location={rainfallLocations}/> }
+              {selectedTab === 2 && <WaterlevelMap setLocations={setWaterlevelLocations} location={waterlevelLocations} />}
+              {selectedTab === 3 && <Map />}
+          </MapContainer> 
+
+          {selectedTab === 1 &&
+            rainfallLocations && (
+              <div className="absolute top-28 left-10 z-20">
+                <RainfallWidget selectedOption={rainfallLocations} />
+              </div>
+            )
+          }
+
+          {selectedTab === 2 &&
+            waterlevelLocations && (
+              <div className="absolute top-28 left-10 z-20">
+                <WaterlevelWidget selectedOption={waterlevelLocations} />
+              </div>
+            )
+          }
+
+          {selectedTab === 3 && 
+            <div className='absolute top-28 left-10 p-4bg-opacity-50 rounded-lg shadow-lg z-20'>
+              <Form />
+            </div>
+          }
         </div>
       </div>
     </div>

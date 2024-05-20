@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Chart } from 'react-google-charts';
 // import { fetchAllData } from '../../utils/widgetAPI';
 
-export default function Widget2({ selectedOption, width, height }) {
+export default function WaterlevelWidget({ selectedOption, width, height }) {
 
     const [data, setData] = useState({ station: { name: '' }, rainfall: [], humidity: [], temperature: [] });
 
@@ -11,9 +11,7 @@ export default function Widget2({ selectedOption, width, height }) {
     }, [selectedOption]);
 
     return (
-        <>
-        <hr/>
-        <div className='relative text-xl bg-white h-max text-slate-800 mx-auto flex flex-col p-10 shadow-lg z-10 ' style={{ width, height }}>
+        <div className='relative text-xl bg-black bg-opacity-40 h-max text-slate-800 mx-auto flex flex-col p-10 shadow-lg z-10 ' style={{ width, height }}>
             <h5 className='text-center'>CLIMATE STATION</h5>
             <hr className='mb-6'/>
             <div className='relative flex justify-evenly'> 
@@ -35,7 +33,6 @@ export default function Widget2({ selectedOption, width, height }) {
             <div className='flex align-bottom justify-center h-max'>
             </div>
         </div>  
-        </>
     );
 }
 
