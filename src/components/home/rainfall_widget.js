@@ -25,7 +25,7 @@ export default function RainfallWidget({ selectedOption }) {
     }
 
     return (
-        <div className='relative text-xl w-max bg-black bg-opacity-40 rounded-xl text-white h-max mx-2 my-0 flex flex-col p-10 shadow-lg z-10'>
+        <div className='relative text-xl w-max bg-black bg-opacity-20 rounded-xl text-white h-max mx-2 my-0 flex flex-col p-10 shadow-lg z-10'>
             <div className='relative flex justify-evenly'>
                 {/* Display current date, time, and temperature */}
                 <div className='w-1/3 flex justify-evenly'>
@@ -96,7 +96,7 @@ const barChartOptions = {
         titleTextStyle: { color: "#fff" }, 
         textStyle: { color: "#fff" },
         slantedText: true,
-        slantedTextAngle: 45 
+        slantedTextAngle: 90
     },
     vAxis: { 
         title: "Rainfall (mm)",

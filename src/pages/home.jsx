@@ -37,8 +37,8 @@ import WaterlevelWidget from '../components/home/waterlevel_widget';
           <MapContainer
             className='h-full w-full relative z-10'
             center={[19.14, 72,2]}
-            zoom={12.4}
-            minZoom={12.4}
+            zoom={13}
+            minZoom={11}
             maxZoom={21}
             maxBounds={[
               [19.4, 72.6],
