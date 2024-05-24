@@ -15,6 +15,11 @@ const WhoWeAre = () => {
         <>
             {/* <Header/> */}
             <div className="who-we-are h-full">
+                <p>Climate Studies at IIT Bombay, in collaboration with HDFC Ergo, hopes to harness the power of social media to monitor Mumbai floods by taking help from its residents and asking them to post details about floods in their neighborhoods, and collecting this data to issue real-time geographically-specific flood alerts/warnings. The gathered data shall be used to improve flood emergency response and rescue efforts, and help develop accurate flood forecasts in the future.
+                <br></br>
+                <br></br>
+                Real-time information at hand can help save lives during disasters. At best, we hope to help Mumbaikars plan their monsoon days effectively. Our ultimate aim is to create a flood resilience plan for the Mumbai metropolitan region. 
+                </p>
                 <h1>WHO WE ARE</h1>
                 <div className="content">
                     <div className="left-section">

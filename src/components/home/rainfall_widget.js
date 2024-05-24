@@ -2,15 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { Chart } from 'react-google-charts';
 import axios from 'axios';
 import { fetchAllData } from '../../utils/widgetAPI';
-
-
+import clou from '../../icons/cloudy.png';
+import img1 from '../../icons/download.png'; // Add your image imports here
+import img2 from '../../icons/download.png';
+import img3 from '../../icons/download.png';
 
 export default function RainfallWidget({ selectedOption }) {
     const [data, setData] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
 
     useEffect(() => {
         if (selectedOption) {
-            console.log('rainfal', selectedOption)
+            console.log('rainfal', selectedOption);
             fetchAllData(selectedOption.id)
                 .then(data => setData(data))
                 .catch(error => console.error('Error fetching station data:', error));
@@ -22,12 +25,13 @@ export default function RainfallWidget({ selectedOption }) {
     }
 
     return (
-        <div className='relative text-xl w-max bg-black bg-opacity-40 rounded-xl text-white h-max mx-auto flex flex-col p-10 shadow-lg z-10'>
+        <div className='relative text-xl w-max bg-black bg-opacity-20 rounded-xl text-white h-max mx-2 my-0 flex flex-col p-10 shadow-lg z-10'>
             <div className='relative flex justify-evenly'>
                 {/* Display current date, time, and temperature */}
                 <div className='w-1/3 flex justify-evenly'>
                     <div className='flex flex-col text-center'>
-                        <span style={{ fontSize: '2rem', color: '#ff4500' }}>{data.data.temperature}°C</span>                        
+                        <img src={clou} alt="IIT Logo" width="48" height="48" align="center"/>
+                        <span style={{ fontSize: '2rem', color: '#ff4500', marginTop: '5px' }}>{data.data.temperature}°C</span>                        
                     </div>
                 </div>
                 <div className='w-1/3 flex justify-evenly flex-col text-center'>
@@ -47,103 +51,150 @@ export default function RainfallWidget({ selectedOption }) {
                     </div>
                 </div>
             </div>
-            {/* Keep the chart components as it is */}
+            {/* New charts */}
+            <br></br>
             <div className='flex align-bottom justify-center h-max relative'>
-                <RainfallChartMap Data={data.rainfall} />
+                <RainfallBarChart />
             </div>
             <div className='flex align-bottom justify-center h-max'>
-                <HumidityChartMap Data={data.humidity} />
+                <DailyPredictionChart />
             </div>
+            <button 
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+                onClick={() => setModalOpen(true)}
+            >
+                View Past Rainfall
+            </button>
+
+            {modalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                    <div className="bg-white p-4 rounded-lg relative">
+                        <button 
+                            className="absolute top-2 right-2 text-gray-500 hover:text-black-700"
+                            onClick={() => setModalOpen(false)}
+                        >
+                            &times;
+                        </button>
+                        <div className="flex flex-row items-center">
+                            <img src={img1} alt="Image 1" className="mb-4 w-1/3"/>
+                            <img src={img2} alt="Image 2" className="mb-4 w-1/3"/>
+                            <img src={img3} alt="Image 3" className="mb-4 w-1/3"/>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>  
     );
 }
 
-export const options = {
-    title: "Rainfall Over Time",
-    hAxis: { title: "Time", titleTextStyle: { color: "#333" } },
-    vAxis: { title: "Rainfall (mm)", minValue: 0 },
-    chartArea: { width: "80%", height: "40%" },
+// Options for the new charts
+const barChartOptions = {
+    title: "Hourly Rainfall Forecast",
+    titleTextStyle: { color: "#fff", fontSize: 14, bold: true },
+    hAxis: { 
+        title: "Time", 
+        titleTextStyle: { color: "#fff" }, 
+        textStyle: { color: "#fff" },
+        slantedText: true,
+        slantedTextAngle: 90
+    },
+    vAxis: { 
+        title: "Rainfall (mm)",
+        titleTextStyle: { color: "#fff" },
+        textStyle: { color: "#fff" }, 
+        minValue: 0 
+    },
+    chartArea: { width: "90%", height: "70%" },
+    backgroundColor: 'transparent',
+    colors: ['#76A7FA', '#ff4500'],
+    isStacked: true,
 };
 
-export const rainfalloptions = {
-    title: "Rainfall Over Time",
-    hAxis: { title: "Time", titleTextStyle: { color: "#333" } },
-    vAxis: { title: "Rainfall (mm)", minValue: 0 },
-    chartArea: { width: "80%", height: "40%" },
+const dailyPredictionOptions = {
+    title: "Daily Rainfall Forecast",
+    titleTextStyle: { color: "#fff", fontSize: 16, bold: true, align: 'center' },
+    hAxis: { 
+        title: "Day", 
+        titleTextStyle: { color: "#fff" }, 
+        textStyle: { color: "#fff" } 
+    },
+    vAxis: { 
+        title: "Rainfall (mm)",  
+        titleTextStyle: { color: "#fff" },
+        textStyle: { color: "#fff" }, fontSize: 16,
+        minValue: 0 
+    },
+    chartArea: { width: "80%", height: "70%" },
+    backgroundColor: 'transparent',
 };
 
-export const humidityoptions = {
-    title: "Humidity Over Time",
-    hAxis: { title: "Time", titleTextStyle: { color: "#333" } },
-    vAxis: { title: "Humidity (%)", minValue: 0 },
-    chartArea: { width: "80%", height: "40%" },
-};
+// Dummy data for the new charts
+const rainfallBarChartData = [
+    ["Time", "Rainfall (Past 6 hrs)", "Rainfall (Next 24 hrs)"],
+    ["10 AM", 1.5, 0],
+    ["11 AM", 2, 0],
+    ["12 PM", 0.5, 0],
+    ["1 PM", 1, 0],
+    ["2 PM", 3, 0],
+    ["3 PM", 2.5, 0],
+    ["4 PM", 0, 3],
+    ["5 PM", 0, 4.5],
+    ["6 PM", 0, 5],
+    ["7 PM", 0, 3],
+    ["8 PM", 0, 4.5],
+    ["9 PM", 0, 5],
+    ["10 PM", 0, 3.5],
+    ["11 PM", 0, 2.5],
+    ["12 AM", 0, 3],
+    ["1 AM", 0, 4],
+    ["2 AM", 0, 3.5],
+    ["3 AM", 0, 3],
+    ["4 AM", 0, 2.5],
+    ["5 AM", 0, 4],
+    ["6 AM", 0, 3],
+    ["7 AM", 0, 2.5],
+    ["8 AM", 0, 4],
+    ["9 AM", 0, 3.5],
+    ["10 AM", 0, 2],
+    ["11 AM", 0, 4],
+    ["12 PM", 0, 3],
+    ["1 PM", 0, 3.5],
+    ["2 PM", 0, 4],
+    ["3 PM", 0, 5],
+];
 
-export const temperatureoptions = {
-    title: "Temperature Over Time",
-    hAxis: { title: "Time", titleTextStyle: { color: "#333" } },
-    vAxis: { title: "Temperature (°C)", minValue: 0 },
-    chartArea: { width: "80%", height: "100%" },
-};
+const dailyPredictionChartData = [
+    ["Day", "Rainfall"],
+    ["2 Days Ago", 1.5],
+    ["Day Before Yesterday", 2],
+    ["Yesterday", 2.5],
+    ["Today", 3],
+    ["Tomorrow", 2],
+    ["Day After Tomorrow", 3.5]
+];
 
-export function HumidityChartMap({ Data }) {
-    if (!Data) {
-        return <div>No humidity data available</div>;
-    }
-
-    const chartData = [["Time", "Humidity"]];
-    Data.forEach((entry) => {
-        chartData.push([new Date(entry.time), entry.humidity]);
-    });
-
+function RainfallBarChart() {
     return (
-        <Chart
-            chartType="AreaChart"
-            width="100%"
-            data={chartData}
-            options={humidityoptions}
-        />
+        
+                <Chart
+                    chartType="ColumnChart"
+                    width="100%"
+                    height="300px"
+                    data={rainfallBarChartData}
+                    options={barChartOptions}
+                />
+            
     );
 }
 
-export function TemperatureChartMap({ Data }) {
-    if (!Data) {
-        return <div>No temperature data available</div>;
-    }
-
-    const chartData = [["Time", "Temperature"]];
-    Data.forEach((entry) => {
-        chartData.push([new Date(entry.time), entry.temperature]);
-    });
-
+function DailyPredictionChart() {
     return (
         <Chart
-            chartType="AreaChart"
-            width="50%"
-            height="100px"
-            data={chartData}
-            options={temperatureoptions}
-        />
-    );
-}
-
-export function RainfallChartMap({ Data }) {
-    if (!Data) {
-        return <div>No rainfall data available</div>;
-    }
-
-    const chartData = [["Time", "Rainfall"]];
-    Data.forEach((entry) => {
-        chartData.push([new Date(entry.time), entry.rainfall]);
-    });
-
-    return (
-        <Chart
-            chartType="AreaChart"
-            width="100%"
-            height="100px"
-            data={chartData}
-            options={rainfalloptions}
+            chartType="ColumnChart"
+            width="110%"
+            height="250px"
+            data={dailyPredictionChartData}
+            options={dailyPredictionOptions}
         />
     );
 }
