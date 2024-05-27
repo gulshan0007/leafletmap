@@ -51,7 +51,7 @@ const waterLevelOptions = {
         textStyle: { color: "#fff" }, fontSize: 16,
         minValue: 0 
     },
-    chartArea: { width: "80%", height: "70%" },
+    chartArea: { width: "100%", height: "70%" },
     backgroundColor: 'transparent',
     legend: { position: 'none' },
     animation: {
@@ -88,7 +88,7 @@ export function WaterLevelChart({ data, selectedStation, onStationClick }) {
     return (
         <Chart
             chartType="ColumnChart"
-            width="150%"
+            width="100%"
             height="400px"
             data={chartData}
             options={waterLevelOptions}

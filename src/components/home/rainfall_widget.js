@@ -96,13 +96,14 @@ const barChartOptions = {
         titleTextStyle: { color: "#fff" }, 
         textStyle: { color: "#fff" },
         slantedText: true,
-        slantedTextAngle: 90
+        slantedTextAngle: 45,
     },
     vAxis: { 
         title: "Rainfall (mm)",
         titleTextStyle: { color: "#fff" },
         textStyle: { color: "#fff" }, 
-        minValue: 0 
+        minValue: 0,
+        gridlines: { color: 'none' },
     },
     chartArea: { width: "90%", height: "70%" },
     backgroundColor: 'transparent',
@@ -116,62 +117,88 @@ const dailyPredictionOptions = {
     hAxis: { 
         title: "Day", 
         titleTextStyle: { color: "#fff" }, 
-        textStyle: { color: "#fff" } 
+        textStyle: { color: "#fff" },
+        slantedTextAngle: 0,
+        textStyle: { color: "#fff" }, fontSize: 8,
     },
     vAxis: { 
         title: "Rainfall (mm)",  
         titleTextStyle: { color: "#fff" },
-        textStyle: { color: "#fff" }, fontSize: 16,
-        minValue: 0 
+        textStyle: { color: "#fff" }, fontSize: 8,
+        minValue: 0,
+        gridlines: { color: 'none' } 
     },
     chartArea: { width: "80%", height: "70%" },
     backgroundColor: 'transparent',
+    legend: { position: 'top', alignment: 'end', textStyle: { color: '#fff' } }, // Position top right
+    series: {
+        0: { color: 'green', labelInLegend: '0 to 7 mm' },
+        1: { color: 'yellow', labelInLegend: '7 to 36 mm' },
+        2: { color: 'orange', labelInLegend: '36 to 124 mm' },
+        3: { color: 'red', labelInLegend: 'above 124 mm' },
+    },
 };
+
+
 
 // Dummy data for the new charts
 const rainfallBarChartData = [
     ["Time", "Rainfall (Past 6 hrs)", "Rainfall (Next 24 hrs)"],
-    ["10 AM", 1.5, 0],
-    ["11 AM", 2, 0],
-    ["12 PM", 0.5, 0],
-    ["1 PM", 1, 0],
-    ["2 PM", 3, 0],
-    ["3 PM", 2.5, 0],
-    ["4 PM", 0, 3],
-    ["5 PM", 0, 4.5],
-    ["6 PM", 0, 5],
-    ["7 PM", 0, 3],
-    ["8 PM", 0, 4.5],
-    ["9 PM", 0, 5],
-    ["10 PM", 0, 3.5],
-    ["11 PM", 0, 2.5],
-    ["12 AM", 0, 3],
-    ["1 AM", 0, 4],
-    ["2 AM", 0, 3.5],
-    ["3 AM", 0, 3],
-    ["4 AM", 0, 2.5],
-    ["5 AM", 0, 4],
-    ["6 AM", 0, 3],
-    ["7 AM", 0, 2.5],
-    ["8 AM", 0, 4],
-    ["9 AM", 0, 3.5],
-    ["10 AM", 0, 2],
-    ["11 AM", 0, 4],
-    ["12 PM", 0, 3],
-    ["1 PM", 0, 3.5],
-    ["2 PM", 0, 4],
-    ["3 PM", 0, 5],
+    ["10", 1.5, 0],
+    ["11", 2, 0],
+    ["12", 0.5, 0],
+    ["1", 1, 0],
+    ["2", 3, 0],
+    ["3", 2.5, 0],
+    ["4", 0, 3],
+    ["5", 0, 4.5],
+    ["6", 0, 5],
+    ["7", 0, 3],
+    ["8", 0, 4.5],
+    ["9", 0, 5],
+    ["10", 0, 3.5],
+    ["11", 0, 2.5],
+    ["12", 0, 3],
+    ["1", 0, 4],
+    ["2", 0, 3.5],
+    ["3", 0, 3],
+    ["4", 0, 2.5],
+    ["5", 0, 4],
+    ["6", 0, 3],
+    ["7", 0, 2.5],
+    ["8", 0, 4],
+    ["9", 0, 3.5],
+    ["10", 0, 2],
+    ["11", 0, 4],
+    ["12", 0, 3],
+    ["1", 0, 3.5],
+    ["2", 0, 4],
+    ["3", 0, 5],
 ];
 
+// Dummy data for daily prediction chart with color
 const dailyPredictionChartData = [
-    ["Day", "Rainfall"],
-    ["2 Days Ago", 1.5],
-    ["Day Before Yesterday", 2],
-    ["Yesterday", 2.5],
-    ["Today", 3],
-    ["Tomorrow", 2],
-    ["Day After Tomorrow", 3.5]
+    ["Day", "Rainfall", { role: "style" }],
+    ["2 Days Ago", 1.5, "#00215E"], // Green
+    ["Day Before Yesterday", 2, "#00215E"], // Green
+    ["Yesterday", 50, "#00215E"], // Red
+    ["Today", 150, getColor(150)], // Orange
+    ["Tomorrow", 20, getColor(20)], // Orange
+    ["Day After Tomorrow", 3.5, getColor(3.5)] // Yellow
 ];
+
+// Function to determine color based on rainfall value
+function getColor(rainfall) {
+    if (rainfall > 124) {
+        return "#FF0000"; // Red
+    } else if (rainfall >= 36 && rainfall <= 124) {
+        return "#FFA500"; // Orange
+    } else if (rainfall >= 7 && rainfall < 36) {
+        return "#FFFF00"; // Yellow
+    } else {
+        return "green"; // Green
+    }
+}
 
 function RainfallBarChart() {
     return (
@@ -186,6 +213,7 @@ function RainfallBarChart() {
             
     );
 }
+
 
 function DailyPredictionChart() {
     return (

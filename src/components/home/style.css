@@ -1,0 +1,11 @@
+.custom-popup .leaflet-popup-content-wrapper {
+    width: 350px;  /* Adjust the width as needed */
+    height: 400px; /* Adjust the height as needed */
+  }
+  
+  .custom-popup .leaflet-popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
