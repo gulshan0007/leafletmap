@@ -10,10 +10,9 @@ function TrainFlood() {
       ></iframe>
       <div className="w-1/3 h-full p-4">
         {/* Information related to the iframe */}
-        <h1 className="text-3xl font-bold">Train Flood Information</h1>
+        <h1 className="text-3xl font-bold text-center">Train Flood Information</h1>
         <p className="mt-4">
-          The content of the "trainflood.html" file can be displayed here or any other
-          related information about the train flood situation.
+          This page is currently under-construction.<br></br>
         </p>
         <ul className="list-disc ml-5 mt-4">
           <li>Current status of the flood</li>

@@ -46,7 +46,7 @@ const waterLevelOptions = {
         slantedTextAngle: 45 
     },
     vAxis: { 
-        title: "Water Level",  
+        title: "Water Level (in mm)",  
         titleTextStyle: { color: "#fff" },
         textStyle: { color: "#fff" }, fontSize: 16,
         minValue: 0 

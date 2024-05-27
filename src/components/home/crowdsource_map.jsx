@@ -90,37 +90,3 @@ function Map() {
 }
 
 export default Map;
-
-// Add the following CSS styles directly into your main CSS file or a CSS module
-/*
-.info.legend {
-  background: white;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-}
-
-.info.legend h4 {
-  margin: 0 0 5px;
-}
-
-.info.legend .circle {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin-right: 5px;
-  border-radius: 50%;
-}
-
-.info.legend .blue {
-  background: blue;
-}
-
-.info.legend .yellow {
-  background: yellow;
-}
-
-.info.legend .red {
-  background: red;
-}
-*/
