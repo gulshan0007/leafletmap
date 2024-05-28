@@ -37,7 +37,6 @@ export default function RainFallMap({location, setLocations}) {
   } else {
     return (
       <>
-          <MarkerClusterGroup chunkedLoading iconCreateFunction={createClusterCustomIcon}>
             {stations.map((station, index) => (
               <Marker
                 key={index}
@@ -48,7 +47,6 @@ export default function RainFallMap({location, setLocations}) {
                 <Popup>{station.name}</Popup>
               </Marker>
             ))}
-          </MarkerClusterGroup>
         </>
     );
   }
@@ -56,7 +54,7 @@ export default function RainFallMap({location, setLocations}) {
 
 const customIcon = new Icon({
   iconUrl: require("../../icons/placeholder.png"),
-  iconSize: [40, 40] 
+  iconSize: [25, 25 ] 
 });
 
 

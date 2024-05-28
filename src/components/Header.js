@@ -1,29 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../styles.css'
 
 function Header() {
     return (
-        <header className="h-20 mx-auto shadow-xl bg-white z-20 flex flex-col justify-center">
-            <div className="h-full flex justify-evenly text-center w-11/12">
+        <header className="h-12 mx-auto shadow-xl flex flex-col justify-center bg-black bg-opacity-70 absolute top-0 w-screen z-20 ">
+            <div className="h-full flex justify-evenly w-11/12 mx-auto">
                 <div className='h-full flex gap-5 mt-[.5rem]'>
-                    <img src="/img/hdfcergo.png" alt="logo" style={{height: '4rem'}} />
+                    
+                    <img src="/img/hdfcergo.png" alt="logo" style={{height: '2rem'}} />
+                    <img src="/img/c.png" alt="logo" style={{height: '2rem'}} />
                     <img src="/img/iitb.png" alt="logo" className='' 
-                    style={{ height: '4rem' }}
+                    style={{ height: '2rem' }}
                     />
                 </div>
-                <h1 className='font-bold text-2xl flex flex-col justify-center'>Mumbai Flood Warning System</h1>
-                <ul className="flex space-x-5 h-full">
-                    <li>
-                        <Link to="/" className="hover:underline h-full bold text-lg flex flex-col justify-center hover:text-violet-500">Home</Link>
+                <h1 className=' w-2/3 font-bold text-xl flex flex-col justify-center h-full text-right font-merriweather' style={{color: 'white'}}>Experimental Mumbai Flood Warning System</h1>
+                <ul className="flex w-1/3 space-x-5 h-full justify-end">
+                    <li className='flex flex-col justify-center'>
+                        <Link to="/" className="p-2 rounded-xl text-white bold text-sm flex flex-col justify-center hover:bg-white hover:text-black">Home</Link>
                     </li>
-                    <li>
-                        <Link to="/train" className="hover:underline h-full bold text-lg flex flex-col justify-center hover:text-violet-500">Train</Link>
+                    <li className='flex flex-col justify-center'>
+                        <Link to="/train" className="p-2 rounded-xl text-white bold text-sm flex flex-col justify-center hover:bg-white hover:text-black">Train</Link>
                     </li>
-                    <li>
-                        <Link to="/past" className="hover:underline h-full bold text-lg flex flex-col justify-center hover:text-violet-500">Past Data</Link>
+                    <li className='flex flex-col justify-center'>
+                        <Link to="/past" className="p-2 rounded-xl text-white bold text-sm flex flex-col justify-center hover:bg-white hover:text-black">Past Data</Link>
                     </li>
-                    <li>
-                        <Link to="/about" className="hover:underline h-full bold text-lg flex flex-col justify-center hover:text-violet-500">About</Link>
+                    <li className='flex flex-col justify-center'>
+                            <Link to="/about" className="p-2 rounded-xl text-white bold text-sm flex flex-col justify-center hover:bg-white hover:text-black">About</Link>
                     </li>
                 </ul>
             </div>

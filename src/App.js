@@ -11,7 +11,7 @@ import BlogPage from './pages/BlogPage'
 
 function App() {
   return (
-    <div className='bg-orange-200'>
+    <>
     <BrowserRouter>
     <Header /> 
       <Routes>
@@ -22,7 +22,7 @@ function App() {
       <Route path='/blog' element={<BlogPage />} />
       </Routes>
     </BrowserRouter>
-    </div>
+    </>
   )
 }
 

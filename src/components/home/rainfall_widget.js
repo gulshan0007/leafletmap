@@ -25,38 +25,35 @@ export default function RainfallWidget({ selectedOption }) {
     }
 
     return (
-        <div className='relative text-xl w-max bg-black bg-opacity-20 rounded-xl text-white h-max mx-2 my-0 flex flex-col p-10 shadow-lg z-10'>
-            <div className='relative flex justify-evenly'>
+        <div className='relative text-xl w-[30rem] bg-black bg-opacity-20 rounded-xl h-max mx-0 my-0 flex flex-col p-2 shadow-lg z-10'>
+            <div className='relative flex justify-center '>
                 {/* Display current date, time, and temperature */}
-                <div className='w-1/3 flex justify-evenly'>
+                
+                
+                <div className='w-1/3 flex justify-evenly mx-0'>
                     <div className='flex flex-col text-center'>
-                        <img src={clou} alt="IIT Logo" width="48" height="48" align="center"/>
-                        <span style={{ fontSize: '2rem', color: '#ff4500', marginTop: '5px' }}>{data.data.temperature}°C</span>                        
+                        <img src={clou} alt="IIT Logo" width="20" height="20" align="center"/>
+                        <span className='text-black text-lg'>{data.data.temperature}°C</span>                        
                     </div>
                 </div>
-                <div className='w-1/3 flex justify-evenly flex-col text-center'>
+                <div className='w-1/3 flex justify-evenly text-sm text-black flex-col text-center'>
                     <span className='mx-auto'>                    
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-map-pin"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-map-pin"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                     </span>
                     {data.station.name}
                 </div>
-                <div className='w-1/3 flex justify-evenly'>
+                <div className='w-1/3 flex justify-evenly mx-0 my-1'>
                     <div className='flex flex-col text-center'>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#47a0ff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="feather feather-droplets"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg>
-                        {data.data.humidity}
-                    </div>
-                    <div className='flex flex-col text-center'>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#47a0ff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="feather feather-barometer"><path d="M12 20V10m0 10a8 8 0 0 0 8-8 8 8 0 0 0-16 0 8 8 0 0 0 8 8Z"/></svg>
-                        {data.data.pressure}
+                        <button className="alert-button" onClick={() => alert('Report Flood')}>
+                            Report Flood
+                        </button>
                     </div>
                 </div>
             </div>
-            {/* New charts */}
-            <br></br>
-            <div className='flex align-bottom justify-center h-max relative'>
+            <div className='flex-col align-bottom justify-center h-max relative'>
                 <RainfallBarChart />
             </div>
-            <div className='flex align-bottom justify-center h-max'>
+            <div className='flex-col align-bottom justify-center h-max'>
                 <DailyPredictionChart />
             </div>
             <button 
@@ -90,32 +87,32 @@ export default function RainfallWidget({ selectedOption }) {
 // Options for the new charts
 const barChartOptions = {
     title: "Hourly Rainfall Forecast",
-    titleTextStyle: { color: "#fff", fontSize: 14, bold: true },
+    titleTextStyle: { color: "#fff", fontSize: 14, bold: true, alignment: 'center' },
+    
     hAxis: { 
-        title: "Time", 
         titleTextStyle: { color: "#fff" }, 
-        textStyle: { color: "#fff" },
+        textStyle: { color: "black", fontSize: 10 },
         slantedText: true,
-        slantedTextAngle: 45,
+        slantedTextAngle: 90,
     },
     vAxis: { 
         title: "Rainfall (mm)",
         titleTextStyle: { color: "#fff" },
-        textStyle: { color: "#fff" }, 
+        textStyle: { color: "black", fontSize: 10 }, 
         minValue: 0,
-        gridlines: { color: 'none' },
+        gridlines: { count: 6, color: '#ccc' }, // Add 6 horizontal reference lines
     },
-    chartArea: { width: "90%", height: "70%" },
+    chartArea: { width: "90%", height: "50%" },
     backgroundColor: 'transparent',
-    colors: ['#76A7FA', '#ff4500'],
+    legend: { position: 'bottom', alignment: 'center', textStyle: { color: '#fff' } },
+    colors: ['#D4D4D4', '#ff4500'],
     isStacked: true,
 };
 
 const dailyPredictionOptions = {
     title: "Daily Rainfall Forecast",
-    titleTextStyle: { color: "#fff", fontSize: 16, bold: true, align: 'center' },
+    titleTextStyle: { color: "#fff", fontSize: 14, bold: true },
     hAxis: { 
-        title: "Day", 
         titleTextStyle: { color: "#fff" }, 
         textStyle: { color: "#fff" },
         slantedTextAngle: 0,
@@ -128,52 +125,50 @@ const dailyPredictionOptions = {
         minValue: 0,
         gridlines: { color: 'none' } 
     },
-    chartArea: { width: "80%", height: "70%" },
+    chartArea: { width: "90%", height: "50%" },
     backgroundColor: 'transparent',
-    legend: { position: 'top', alignment: 'end', textStyle: { color: '#fff' } }, // Position top right
-    series: {
-        0: { color: 'green', labelInLegend: '0 to 7 mm' },
-        1: { color: 'yellow', labelInLegend: '7 to 36 mm' },
-        2: { color: 'orange', labelInLegend: '36 to 124 mm' },
-        3: { color: 'red', labelInLegend: 'above 124 mm' },
-    },
+    // legend: { position: 'down', alignment: 'end', textStyle: { color: '#fff' } }, 
+    // series: {
+    //     0: { color: 'green', labelInLegend: '0 to 7 mm' },
+    //     1: { color: 'yellow', labelInLegend: '7 to 36 mm' },
+    //     2: { color: 'orange', labelInLegend: '36 to 124 mm' },
+    //     3: { color: 'red', labelInLegend: 'above 124 mm' },
+    // },
 };
-
-
 
 // Dummy data for the new charts
 const rainfallBarChartData = [
     ["Time", "Rainfall (Past 6 hrs)", "Rainfall (Next 24 hrs)"],
-    ["10", 1.5, 0],
-    ["11", 2, 0],
-    ["12", 0.5, 0],
-    ["1", 1, 0],
-    ["2", 3, 0],
-    ["3", 2.5, 0],
-    ["4", 0, 3],
-    ["5", 0, 4.5],
-    ["6", 0, 5],
-    ["7", 0, 3],
-    ["8", 0, 4.5],
-    ["9", 0, 5],
-    ["10", 0, 3.5],
-    ["11", 0, 2.5],
-    ["12", 0, 3],
-    ["1", 0, 4],
-    ["2", 0, 3.5],
-    ["3", 0, 3],
-    ["4", 0, 2.5],
-    ["5", 0, 4],
-    ["6", 0, 3],
-    ["7", 0, 2.5],
-    ["8", 0, 4],
-    ["9", 0, 3.5],
-    ["10", 0, 2],
-    ["11", 0, 4],
-    ["12", 0, 3],
-    ["1", 0, 3.5],
-    ["2", 0, 4],
-    ["3", 0, 5],
+    ["10 AM", 1.5, 0],
+    ["11 AM", 2, 0],
+    ["12 PM", 0.5, 0],
+    ["1 PM", 1, 0],
+    ["2 PM", 3, 0],
+    ["3 PM", 2.5, 0],
+    ["4 PM", 0, 3],
+    ["5 PM", 0, 4.5],
+    ["6 PM", 0, 5],
+    ["7 PM", 0, 3],
+    ["8 PM", 0, 4.5],
+    ["9 PM", 0, 5],
+    ["10 PM", 0, 3.5],
+    ["11 PM", 0, 2.5],
+    ["12 AM", 0, 3],
+    ["1 AM", 0, 4],
+    ["2 AM", 0, 3.5],
+    ["3 AM", 0, 3],
+    ["4 AM", 0, 2.5],
+    ["5 AM", 0, 4],
+    ["6 AM", 0, 3],
+    ["7 AM", 0, 2.5],
+    ["8 AM", 0, 4],
+    ["9 AM", 0, 3.5],
+    ["10 AM", 0, 2],
+    ["11 AM", 0, 4],
+    ["12 PM", 0, 3],
+    ["1 PM", 0, 3.5],
+    ["2 PM", 0, 4],
+    ["3 PM", 0, 5],
 ];
 
 // Dummy data for daily prediction chart with color
@@ -202,27 +197,50 @@ function getColor(rainfall) {
 
 function RainfallBarChart() {
     return (
-        
-                <Chart
-                    chartType="ColumnChart"
-                    width="100%"
-                    height="300px"
-                    data={rainfallBarChartData}
-                    options={barChartOptions}
-                />
-            
+        <Chart
+            chartType="ColumnChart"
+            width="100%"
+            height="200px"
+            data={rainfallBarChartData}
+            options={barChartOptions}
+            className='bg-black bg-opacity-20 rounded-xl m-0 font-roboto text-sm'
+        />
     );
 }
-
 
 function DailyPredictionChart() {
     return (
         <Chart
             chartType="ColumnChart"
-            width="110%"
-            height="250px"
+            width="100%"
+            height="150px"
             data={dailyPredictionChartData}
             options={dailyPredictionOptions}
+            flex="column"
+            className='bg-black bg-opacity-20 rounded-xl mt-2'
         />
     );
 }
+
+// Add this CSS for the button animation
+const styles = `
+<style>
+    .alert-button {
+        background-color: red;
+        color: white;
+        font-size: 20px;
+        padding: 5px;
+        border: none;
+        border-radius: 10px;
+        animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+</style>
+`;
+
+document.head.insertAdjacentHTML('beforeend', styles);
