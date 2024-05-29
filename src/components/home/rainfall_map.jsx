@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { fetchStations } from "../../utils/widgetAPI";
 import { Icon, divIcon, point } from "leaflet";
 import Widget from "./rainfall_widget"; 
+import '../../styles.css';
 
 export default function RainFallMap({location, setLocations}) {
   const [stations, setStations] = useState([]);
@@ -44,7 +45,7 @@ export default function RainFallMap({location, setLocations}) {
                 icon={customIcon}
                 eventHandlers={{ click: () => handleMarkerClick(station) }}
               >
-                <Popup>{station.name}</Popup>
+                <Popup className="popup-content">{station.name}</Popup>
               </Marker>
             ))}
         </>
@@ -53,7 +54,7 @@ export default function RainFallMap({location, setLocations}) {
 }
 
 const customIcon = new Icon({
-  iconUrl: require("../../icons/placeholder.png"),
+  iconUrl: require("../../icons/placeholder1.png"),
   iconSize: [25, 25 ] 
 });
 

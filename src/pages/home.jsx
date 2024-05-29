@@ -18,23 +18,23 @@ function Home() {
                 <div className='w-full h-full'> 
                     <div className="absolute z-20 top-14 left-1/3 w-80 mx-auto flex justify-center align-middle">
                         <span
-                            className={`h-[2rem] w-[6rem] flex flex-col justify-center text-center cursor-pointer rounded-l-xl transition-all duration-300 ${
-                                selectedTab === 1 ? 'bg-gradient-to-r from-red-500 to-red-700 text-white shadow-lg' : 'bg-gray-100 hover:bg-gray-200'
+                            className={`h-[2rem] w-[6rem] flex flex-col justify-center text-center font-serif cursor-pointer rounded-l-xl transition-all duration-300 ${
+                                selectedTab === 1 ? 'bg-gradient-to-r from-blue-500 to-blue-700 text-white shadow-lg' : 'bg-gray-100 hover:bg-gray-200'
                             }`}
                             onClick={() => setSelectedTab(1)}
                         >
                             Rainfall
                         </span>
                         <span
-                            className={`h-[2rem] w-[6rem] flex flex-col justify-center text-center cursor-pointer transition-all duration-300 ${
-                                selectedTab === 2 ? 'bg-gradient-to-r from-blue-500 to-blue-700 text-white shadow-lg' : 'bg-gray-100 hover:bg-gray-200'
+                            className={`h-[2rem] w-[6rem] flex flex-col justify-center text-center font-serif cursor-pointer transition-all duration-300 ${
+                                selectedTab === 2 ? 'bg-gradient-to-r from-red-500 to-red-700 text-white shadow-lg' : 'bg-gray-100 hover:bg-gray-200'
                             } border-r border-l border-gray-800`}
                             onClick={() => setSelectedTab(2)}
                         >
                             Waterlevel
                         </span>
                         <span
-                            className={`h-[2rem] w-[6rem] flex flex-col justify-center text-center cursor-pointer rounded-r-xl transition-all duration-300 ${
+                            className={`h-[2rem] w-[6rem] flex flex-col justify-center text-center  font-serif cursor-pointer rounded-r-xl transition-all duration-300 ${
                                 selectedTab === 3 ? 'bg-gradient-to-r from-green-500 to-green-700 text-white shadow-lg' : 'bg-gray-100 hover:bg-gray-200'
                             }`}
                             onClick={() => setSelectedTab(3)}
@@ -57,10 +57,12 @@ function Home() {
                         ]}
                     >
                         <TileLayer 
-                            attribution='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' 
-                            url="https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.{ext}" 
-                            ext='png' 
-                        />
+    attribution='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' 
+    url="https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.{ext}" 
+    ext='png' 
+    zoomOptions={false}
+    zoomControlPosition="bottomright"  // Remove the zoom control
+/>
                         {selectedTab === 1 && <RainFallMap setLocations={setRainfallLocations} location={rainfallLocations} />}
                         {selectedTab === 2 && <WaterlevelMap setLocations={setWaterlevelLocations} location={waterlevelLocations} />}
                         {selectedTab === 3 && <Map />}
@@ -73,13 +75,13 @@ function Home() {
                     )}
 
                     {selectedTab === 2 && waterlevelLocations && (
-                        <div className="absolute top-36 left-10 z-20">
+                        <div className="absolute top-24 left-2 z-20">
                             <WaterlevelWidget selectedOption={waterlevelLocations} />
                         </div>
                     )}
 
                     {selectedTab === 3 && (
-                        <div className='absolute top-36 left-10 p-4 bg-opacity-50 rounded-lg shadow-lg z-20'>
+                        <div className='absolute top-24 left-2 p-4 bg-opacity-50 rounded-lg shadow-lg z-20'>
                             <Form />
                         </div>
                     )}

@@ -41,7 +41,7 @@ function Form() {
   
       console.log('sendata:',sendata);
       try {
-          const response = await axios.post(process.env.API_URL || 'http://localhost:8000/crowdsource/data/', sendata );
+          const response = await axios.post(process.env.API_URL || 'http://192.168.0.112:8000/crowdsource/data/', sendata );
           setMessage(response.data.message);
       } catch (error) {
           console.error('Error storing data:', error);
@@ -61,8 +61,8 @@ function Form() {
                     <label htmlFor="name" className="block text-white mb-2">Name:</label>
                     <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} className="w-full border rounded-md py-2 px-4 mb-4 bg-blue-50 text-slate-900" />
 
-                    <label htmlFor="height" className="block text-white mb-2">your Height (cm):</label>
-                    <input type="number" id="height" name="height" value={height} onChange={(e) => setHeight(e.target.value)} className="w-full border rounded-md py-2 px-4 mb-4 bg-blue-50 text-white" required />
+                    <label htmlFor="height" className="block text-white mb-2">Your Height (cm):</label>
+                    <input type="number" id="height" name="height" value={height} onChange={(e) => setHeight(e.target.value)} className="w-full border rounded-md py-2 px-4 mb-4 bg-blue-50 text-slate-900" required />
 
                     <div className="mb-4">
                         <span className="block mb-2 text-white">Water Level (choose one):</span>
@@ -86,7 +86,7 @@ function Form() {
                     </div>
 
                     <label htmlFor="location" className="block text-white mb-2">Location:</label>
-                    <input type="text" id="location" name="location" value={location} onChange={(e) => setLocation(e.target.value)} className="w-full border rounded-md py-2 px-4 mb-4 bg-blue-50 text-white" />
+                    <input type="text" id="location" name="location" value={location} onChange={(e) => setLocation(e.target.value)} className="w-full border rounded-md py-2 px-4 mb-4 bg-blue-50 text-slate-900" />
 
                     <button onClick={handleSubmit} className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Submit</button>
                 </div>

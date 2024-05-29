@@ -23,7 +23,7 @@ export default function WaterlevelMap({setLocations, location}) {
             <Marker
               key={`dummy-${index}`}
               position={dummyMarker.position}
-              icon={blueCircleIcon}
+              icon={customIcon}
               eventHandlers={{ click: () => handleMarkerClick(dummyMarker) }}
             >
               <Popup className="custom-popup">
@@ -41,10 +41,9 @@ export default function WaterlevelMap({setLocations, location}) {
 
 
 // Define a blue circle icon for the second type of markers
-const blueCircleIcon = divIcon({
-  className: "blue-circle-icon",
-  iconSize: [12, 12],
-  html: `<div style="background-color: blue; width: 20px; height: 20px; border-radius: 50%;"></div>`
+const customIcon = new Icon({
+  iconUrl: require("../../icons/aa.png"),
+  iconSize: [50, 50 ] 
 });
 
 // Define dummy markers for the second type of markers
