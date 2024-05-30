@@ -8,6 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path ('crowdsource/', include('crowdsource.urls')),
     path ('widget/', include('widget.urls')),
+    path ('blogs/', include('blogs.urls')),
 
 
 
