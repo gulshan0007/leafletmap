@@ -41,7 +41,7 @@ function Form() {
   
       console.log('sendata:',sendata);
       try {
-          const response = await axios.post(process.env.API_URL || 'http://192.168.0.112:8000/crowdsource/data/', sendata );
+          const response = await axios.post(process.env.API_URL || 'http://localhost:8000/crowdsource/data/', sendata );
           setMessage(response.data.message);
       } catch (error) {
           console.error('Error storing data:', error);
