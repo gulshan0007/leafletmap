@@ -86,3 +86,8 @@
     font-weight: bolder;
     text-align: center;
   }
+  .map-box {
+    height: 450px;
+    width: 450px;
+    border: 1px solid black;
+}

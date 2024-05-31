@@ -26,7 +26,7 @@ export default function RainfallWidget({ selectedOption }) {
     }
 
     return (
-        <div className='relative text-xl w-[30rem] bg-black bg-opacity-20 rounded-xl h-max mx-0 my-0 flex flex-col p-2 shadow-lg z-10'>
+        <div className='relative text-xl w-[30rem] bg-black bg-opacity-20 rounded-xl h-max mx-10 my-0 flex flex-col p-2 shadow-lg z-10'>
             <div className='relative flex justify-center '>
                 {/* Display current date, time, and temperature */}
                 <div className='w-1/3 flex justify-evenly text-sm text-white  font-bold flex-col text-center'>
@@ -85,7 +85,7 @@ export default function RainfallWidget({ selectedOption }) {
 
 // Options for the new charts
 const barChartOptions = {
-    title: "Hourly Rainfall Forecast",
+    title: "Hourly Rainfall Forecast (Experimental)",
     titleTextStyle: { color: "white", fontSize: 16, alignment: 'center' },
     
     hAxis: { 
@@ -109,7 +109,7 @@ const barChartOptions = {
 };
 
 const dailyPredictionOptions = {
-    title: "Daily Rainfall Forecast",
+    title: "Daily Rainfall Forecast (Experimental)",
     titleTextStyle: { color: "#fff", fontSize: 16 },
     hAxis: { 
         titleTextStyle: { color: "#fff" }, 
@@ -173,9 +173,9 @@ const rainfallBarChartData = [
 // Dummy data for daily prediction chart with color
 const dailyPredictionChartData = [
     ["Day", "Rainfall", { role: "style" }],
-    ["2 Days Ago", 1.5, "#00215E"], // Green
-    ["Day Before Yesterday", 2, "#00215E"], // Green
-    ["Yesterday", 50, "#00215E"], // Red
+    ["2 Days Ago", 1.5, "#D4D4D4"], // Green
+    ["Day Before Yesterday", 2, "#D4D4D4"], // Green
+    ["Yesterday", 50, "#D4D4D4"], // Red
     ["Today", 150, getColor(150)], // Orange
     ["Tomorrow", 20, getColor(20)], // Orange
     ["Day After Tomorrow", 3.5, getColor(3.5)] // Yellow
