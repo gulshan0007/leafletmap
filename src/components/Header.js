@@ -16,7 +16,7 @@ function Header() {
                     />
                 </div>
                 <h1 className=' w-2/3 font-bold text-xl flex flex-col justify-center h-full text-right font-merriweather' style={{color: 'white'}}>Experimental Mumbai Flood Warning System</h1>
-                <ul className="flex w-1/3 space-x-1 h-full justify-end">  
+                <ul className="flex w-1/3 space-x-5 h-full justify-end">
                     <li className='flex flex-col justify-center'>
                         <Link to="/" className="p-2 rounded-xl text-white bold text-sm flex flex-col justify-center hover:bg-white hover:text-black font-serif">Home</Link>
                     </li>
@@ -28,9 +28,6 @@ function Header() {
                     </li>
                     <li className='flex flex-col justify-center'>
                             <Link to="/about" className="p-2 rounded-xl text-white bold text-sm flex flex-col justify-center hover:bg-white hover:text-black font-serif">About</Link>
-                    </li>
-                    <li className='flex flex-col justify-center'>
-                        <Link to="/blog" className="p-2 rounded-xl text-white bold text-sm flex flex-col justify-center hover:bg-white hover:text-black font-serif">Blog</Link>
                     </li>
                 </ul>
             </div>

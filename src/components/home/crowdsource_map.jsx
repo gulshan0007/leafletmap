@@ -54,7 +54,7 @@ function Map() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/crowdsource/map/');
+        const response = await axios.get('http://192.168.0.114:8000/crowdsource/map/');
         if (!response.data || !Array.isArray(response.data)) {
           throw new Error('Invalid map data format');
         }

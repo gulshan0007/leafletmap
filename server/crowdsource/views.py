@@ -12,7 +12,7 @@ class StoreData(APIView):
             serializer = CrowdSourceDataSerializer(data=request.data)
             if serializer.is_valid():
                 data = serializer.validated_data
-                if data.get('latitude') == 0 or data.get('longitude') == 0:
+                if data.get('latitude') is 0 or data.get('longitude') is 0:
                     if data.get('location') is None:
                         return JsonResponse({'error': 'Location is required'}, status=status.HTTP_400_BAD_REQUEST)
                     else:
